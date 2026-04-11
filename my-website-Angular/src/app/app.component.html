@@ -1,4 +1,4 @@
-<header class="navbar" [class.collapsed]="navCollapsed">
+<header class="navbar" [class.collapsed]="navCollapsed" [style.font-family]="theme.applyFontToHeader() ? theme.fontFamily() : null" [style.--header-text-color]="theme.applyTextColorToHeader() ? theme.textColor() : null">
   <nav>
     <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
     <a routerLink="/about" routerLinkActive="active">About Me</a>
@@ -37,6 +37,48 @@
         </div>
       </div>
 
+      <div class="setting-row sub-row">
+        <label>Apply color to all text</label>
+        <label class="toggle">
+          <input
+            type="checkbox"
+            [checked]="theme.applyTextColorToHeader()"
+            (change)="theme.applyTextColorToHeader.set($any($event.target).checked)"
+          />
+          <span class="toggle-track">
+            <span class="toggle-thumb"></span>
+          </span>
+        </label>
+      </div>
+
+      <div class="setting-row">
+        <label>Font</label>
+        <select
+          class="font-select"
+          [value]="theme.fontFamily()"
+          (change)="theme.fontFamily.set($any($event.target).value)"
+          [style.font-family]="theme.fontFamily().includes('Wingdings') && theme.applyFontToHeader() ? theme.fontFamily() : null"
+        >
+          @for (opt of theme.fontOptions; track opt.value) {
+            <option [value]="opt.value" [style.font-family]="theme.fontFamily().includes('Wingdings') && theme.applyFontToHeader() ? theme.fontFamily() : opt.value">{{ opt.label }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="setting-row sub-row">
+        <label>Apply font to all text</label>
+        <label class="toggle">
+          <input
+            type="checkbox"
+            [checked]="theme.applyFontToHeader()"
+            (change)="theme.applyFontToHeader.set($any($event.target).checked)"
+          />
+          <span class="toggle-track">
+            <span class="toggle-thumb"></span>
+          </span>
+        </label>
+      </div>
+
       <button class="default-btn" (click)="theme.reset()">Default</button>
     </div>
   }
@@ -46,6 +88,6 @@
   <span>&#8964;</span>
 </div>
 
-<main [style.background-color]="theme.backgroundColor()" [style.color]="theme.textColor()">
+<main [style.background-color]="theme.backgroundColor()" [style.color]="theme.textColor()" [style.font-family]="theme.fontFamily()">
   <router-outlet />
 </main>
