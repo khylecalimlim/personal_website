@@ -1,0 +1,19 @@
+<div class="resume-page">
+  <div class="resume-header">
+    <h1>Resume</h1>
+    <a [href]="pdfUrl" download="Khyle_Calimlim_Resume.pdf" class="download-btn">Download PDF</a>
+  </div>
+
+  <div class="pdf-container">
+    <iframe
+      [src]="pdfUrl"
+      title="Khyle Calimlim Resume"
+      class="pdf-viewer"
+    ></iframe>
+
+    <p class="pdf-fallback">
+      Can't see the PDF?
+      <a [href]="pdfUrl" target="_blank" rel="noopener">Open in a new tab</a>
+    </p>
+  </div>
+</div>

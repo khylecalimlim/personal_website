@@ -1,0 +1,68 @@
+<div class="page">
+  <div class="feedback-layout">
+
+    <section class="form-section">
+      <h1>Feedback</h1>
+      <p class="subtitle">Got thoughts on my work? Leave a comment below.</p>
+
+      <form class="feedback-form" (submit)="$event.preventDefault(); submit()">
+        <div class="field">
+          <label for="name">Name</label>
+          <input
+            id="name"
+            type="text"
+            placeholder="Your name"
+            [value]="name()"
+            (input)="name.set($any($event.target).value)"
+            [disabled]="submitting()"
+            maxlength="80"
+          />
+        </div>
+
+        <div class="field">
+          <label for="comment">Comment</label>
+          <textarea
+            id="comment"
+            placeholder="What did you think?"
+            [value]="comment()"
+            (input)="comment.set($any($event.target).value)"
+            [disabled]="submitting()"
+            rows="5"
+            maxlength="1000"
+          ></textarea>
+        </div>
+
+        @if (errorMessage()) {
+          <p class="error">{{ errorMessage() }}</p>
+        }
+
+        @if (submitted()) {
+          <p class="success">Thanks for your feedback!</p>
+        }
+
+        <button type="submit" class="submit-btn" [disabled]="submitting()">
+          {{ submitting() ? 'Submitting...' : 'Submit' }}
+        </button>
+      </form>
+    </section>
+
+    <section class="entries-section">
+      <h2>What others have said</h2>
+
+      @if (entries().length === 0) {
+        <p class="empty">No feedback yet — be the first!</p>
+      }
+
+      @for (entry of entries(); track entry.id) {
+        <div class="entry-card">
+          <div class="entry-header">
+            <span class="entry-name">{{ entry.name }}</span>
+            <span class="entry-date">{{ entry.createdAt | date:'mediumDate' }}</span>
+          </div>
+          <p class="entry-comment">{{ entry.comment }}</p>
+        </div>
+      }
+    </section>
+
+  </div>
+</div>
