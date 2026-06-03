@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-resume',
@@ -7,5 +8,7 @@ import { Component } from '@angular/core';
   styleUrl: './resume.component.scss'
 })
 export class ResumeComponent {
-  readonly pdfUrl = 'resume.pdf';
+  private sanitizer = inject(DomSanitizer);
+  readonly pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl('resume.pdf');
+  readonly pdfDownloadUrl = 'resume.pdf';
 }
