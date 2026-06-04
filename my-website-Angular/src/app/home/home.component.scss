@@ -89,6 +89,15 @@
   user-select: none;
 }
 
+.mobile-hint { display: none; }
+
+@media (hover: none) and (pointer: coarse) {
+  .desktop-hint { display: none; }
+  .mobile-hint  { display: block; }
+}
+
+.name { cursor: default; }
+
 // ── Easter egg overlay ───────────────────────────────────────────────────────
 .egg-overlay {
   position: fixed;

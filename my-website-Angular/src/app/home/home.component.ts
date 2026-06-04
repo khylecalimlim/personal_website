@@ -20,6 +20,9 @@ export class HomeComponent {
   easterEggActive = signal(false);
   private keyBuffer: string[] = [];
 
+  private tapCount = 0;
+  private tapTimer: ReturnType<typeof setTimeout> | null = null;
+
   @HostListener('window:keydown', ['$event'])
   onKey(e: KeyboardEvent) {
     this.keyBuffer.push(e.key);
@@ -28,6 +31,18 @@ export class HomeComponent {
       this.easterEggActive.set(true);
       this.keyBuffer = [];
     }
+  }
+
+  onNameTap() {
+    this.tapCount++;
+    if (this.tapTimer) clearTimeout(this.tapTimer);
+    if (this.tapCount >= 7) {
+      this.easterEggActive.set(true);
+      this.tapCount = 0;
+      return;
+    }
+    // Reset tap count if they stop tapping for 1.5 seconds
+    this.tapTimer = setTimeout(() => { this.tapCount = 0; }, 1500);
   }
 
   dismissEasterEgg() {

@@ -1,7 +1,7 @@
 <div class="hero">
   <div class="hero-content">
     <p class="greeting">Hey, I'm</p>
-    <h1 class="name">Khyle Calimlim</h1>
+    <h1 class="name" (click)="onNameTap()">Khyle Calimlim</h1>
     <p class="tagline">Software Developer — I build things, break things, and figure out why.</p>
     <p class="bio">
       Welcome to my corner of the internet. This site is where I collect my projects,
@@ -12,7 +12,8 @@
       <a routerLink="/projects" class="btn btn-primary">View Projects</a>
       <a href="resume.pdf" download="Khyle_Calimlim_Resume.pdf" class="btn btn-secondary">Download Resume</a>
     </div>
-    <p class="hint">psst — try the Konami code</p>
+    <p class="hint desktop-hint">psst — try the Konami code</p>
+    <p class="hint mobile-hint">psst — tap your name 7 times</p>
   </div>
 </div>
 
