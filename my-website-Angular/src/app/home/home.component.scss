@@ -114,8 +114,11 @@
   max-width: 360px;
   width: 90%;
 
-  .egg-emoji {
-    font-size: 2.5rem;
+  .egg-img {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
     margin-bottom: 0.25rem;
   }
 

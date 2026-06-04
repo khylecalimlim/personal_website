@@ -19,8 +19,8 @@
 @if (easterEggActive()) {
   <div class="egg-overlay" (click)="dismissEasterEgg()">
     <div class="egg-card" (click)="$event.stopPropagation()">
-      <p class="egg-emoji">🎮</p>
-      <h2>You found it.</h2>
+      <img src="rockFacts.jpg" alt="You Rock" class="egg-img" />
+      <h2>You Rock!</h2>
       <p>↑ ↑ ↓ ↓ ← → ← → B A</p>
       <p class="egg-sub">Respect. Now go build something cool.</p>
       <button (click)="dismissEasterEgg()">Close</button>
