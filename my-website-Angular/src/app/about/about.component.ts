@@ -25,6 +25,14 @@ export class AboutComponent {
 
   current = signal(0);
 
+  get prevIndex() {
+    return (this.current() - 1 + this.images.length) % this.images.length;
+  }
+
+  get nextIndex() {
+    return (this.current() + 1) % this.images.length;
+  }
+
   prev() {
     this.current.update(i => (i - 1 + this.images.length) % this.images.length);
   }

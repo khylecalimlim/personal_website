@@ -29,17 +29,19 @@
     </p>
 
     <div class="carousel">
-      <button class="carousel-btn prev" (click)="prev()" aria-label="Previous">&#8592;</button>
-
-      <div class="carousel-track">
-        @for (image of images; track image.src; let i = $index) {
-          <div class="carousel-slide" [class.active]="i === current()" [class.prev]="i === (current() - 1 + images.length) % images.length" [class.next]="i === (current() + 1) % images.length">
-            <img [src]="image.src" [alt]="image.alt" draggable="false" />
-          </div>
-        }
+      <div class="slide-wrapper side" (click)="prev()" title="Previous">
+        <img [src]="images[prevIndex].src" [alt]="images[prevIndex].alt" draggable="false" />
+        <div class="slide-overlay"></div>
       </div>
 
-      <button class="carousel-btn next" (click)="next()" aria-label="Next">&#8594;</button>
+      <div class="slide-wrapper center">
+        <img [src]="images[current()].src" [alt]="images[current()].alt" draggable="false" />
+      </div>
+
+      <div class="slide-wrapper side" (click)="next()" title="Next">
+        <img [src]="images[nextIndex].src" [alt]="images[nextIndex].alt" draggable="false" />
+        <div class="slide-overlay"></div>
+      </div>
     </div>
 
     <div class="carousel-dots">
