@@ -1,8 +1,15 @@
 .subtitle {
   color: #888;
   margin-top: 0.25rem;
-  margin-bottom: 2rem;
+  margin-bottom: 0.5rem;
   font-size: 0.95rem;
+}
+
+.drag-hint {
+  font-size: 0.75rem;
+  color: #444;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.03em;
 }
 
 .projects-grid {
@@ -15,15 +22,71 @@
   background-color: #1e1e1e;
   border: 1px solid #2e2e2e;
   border-radius: 10px;
-  padding: 1.5rem;
   display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  transition: border-color 0.2s;
+  align-items: stretch;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  cursor: default;
 
   &:hover {
     border-color: #4a4a4a;
   }
+
+  // While being dragged
+  &.cdk-drag-dragging {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+    border-color: #5b8dee;
+    opacity: 0.95;
+  }
+}
+
+// Ghost preview while dragging — invisible, just holds space
+.drag-placeholder {
+  background: #2a2a2a;
+  border: 1px dashed #3a3a3a;
+  border-radius: 10px;
+  min-height: 120px;
+}
+
+// CDK animates all non-dragged cards sliding into new position
+.cdk-drop-list-dragging .project-card:not(.cdk-drag-dragging) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.drag-handle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0.75rem;
+  color: #444;
+  cursor: grab;
+  flex-shrink: 0;
+  border-right: 1px solid #2a2a2a;
+  border-radius: 10px 0 0 10px;
+  transition: color 0.2s, background-color 0.2s;
+  user-select: none;
+
+  &:hover {
+    color: #888;
+    background-color: #252525;
+  }
+
+  &:active {
+    cursor: grabbing;
+  }
+}
+
+.handle-icon {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.card-body {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex: 1;
+  min-width: 0;
 }
 
 .card-header {
@@ -83,7 +146,6 @@
   font-size: 0.9rem;
   color: #aaa;
   line-height: 1.6;
-  flex: 1;
 }
 
 .tags {

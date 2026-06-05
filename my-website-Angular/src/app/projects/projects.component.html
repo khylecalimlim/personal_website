@@ -1,93 +1,34 @@
+<!-- TODO: replace href="#" on each project card with the real GitHub repo URL once created -->
 <div class="page">
   <h1>Projects</h1>
   <p class="subtitle">Things I've been building and exploring.</p>
+  <p class="drag-hint">Drag to reorder</p>
 
-  <div class="projects-grid">
+  <div class="projects-grid" cdkDropList (cdkDropListDropped)="drop($event)">
+    @for (project of projects; track project.title) {
+      <div class="project-card" cdkDrag>
+        <div class="drag-handle" cdkDragHandle>
+          <span class="handle-icon">⠿</span>
+        </div>
 
-    <div class="project-card">
-      <div class="card-header">
-        <a href="#" class="project-title" target="_blank" rel="noopener">
-          Chess Game + AI
-          <span class="link-icon">↗</span>
-        </a>
-        <span class="status wip">In Progress</span>
-      </div>
-      <p class="description">
-        A fully playable chess engine with a custom-built AI opponent using minimax with alpha-beta pruning.
-        Includes full rule implementation — castling, en passant, promotion, check/checkmate — with adjustable difficulty levels.
-      </p>
-      <div class="tags">
-        <span class="tag">Python</span>
-        <span class="tag">AI / Minimax</span>
-        <span class="tag">React</span>
-        <span class="tag">PyTorch</span>
-      </div>
-    </div>
+        <div class="card-body">
+          <div class="card-header">
+            <a [href]="project.href" class="project-title" target="_blank" rel="noopener">
+              {{ project.title }}
+              <span class="link-icon">↗</span>
+            </a>
+            <span class="status" [class]="project.status">{{ project.statusLabel }}</span>
+          </div>
+          <p class="description">{{ project.description }}</p>
+          <div class="tags">
+            @for (tag of project.tags; track tag) {
+              <span class="tag">{{ tag }}</span>
+            }
+          </div>
+        </div>
 
-    <div class="project-card">
-      <div class="card-header">
-        <a href="#" class="project-title" target="_blank" rel="noopener">
-          Music League Analytics
-          <span class="link-icon">↗</span>
-        </a>
-        <span class="status wip">In Progress</span>
+        <div *cdkDragPlaceholder class="drag-placeholder"></div>
       </div>
-      <p class="description">
-        Data pipeline and dashboard for analysing Music League rounds — tracking scoring trends, voter behaviour,
-        taste clusters, and head-to-head records across players. Includes ML clustering of players by taste profile.
-      </p>
-      <div class="tags">
-        <span class="tag">Python</span>
-        <span class="tag">Pandas</span>
-        <span class="tag">Plotly Dash</span>
-        <span class="tag">PostgreSQL</span>
-        <span class="tag">scikit-learn</span>
-      </div>
-    </div>
-
-    <div class="project-card">
-      <div class="card-header">
-        <a href="#" class="project-title" target="_blank" rel="noopener">
-          Containerised Web App
-          <span class="link-icon">↗</span>
-        </a>
-        <span class="status wip">In Progress</span>
-      </div>
-      <p class="description">
-        A full container lifecycle project — Dockerising a web app, orchestrating it with Compose, then migrating to
-        Kubernetes manifests with Ingress and TLS. The goal is real infra knowledge, not just the app.
-      </p>
-      <div class="tags">
-        <span class="tag">Docker</span>
-        <span class="tag">Kubernetes</span>
-        <span class="tag">k3s</span>
-        <span class="tag">Helm</span>
-        <span class="tag">GitHub Actions</span>
-      </div>
-    </div>
-
-
-    <div class="project-card">
-      <div class="card-header">
-        <a href="#" class="project-title" target="_blank" rel="noopener">
-          ESPN Fantasy Football Drafter
-          <span class="link-icon">↗</span>
-        </a>
-        <span class="status wip">In Progress</span>
-      </div>
-      <p class="description">
-        A draft assistant and player predictor for ESPN Fantasy Football leagues. Analyses historical performance,
-        injury data, and matchup schedules to recommend optimal picks in real time during a draft, with season-long
-        projections to guide roster decisions.
-      </p>
-      <div class="tags">
-        <span class="tag">Python</span>
-        <span class="tag">ESPN API</span>
-        <span class="tag">Machine Learning</span>
-        <span class="tag">Pandas</span>
-        <span class="tag">React</span>
-      </div>
-    </div>
-
+    }
   </div>
 </div>
