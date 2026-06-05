@@ -1,3 +1,57 @@
 <div class="page">
-  <h1>About Me</h1>
+
+  <section class="about-section">
+    <h2>Professional</h2>
+    <div class="divider"></div>
+    <p>
+      I'm a software developer with a passion for building things that are both functional and well-crafted.
+      My journey into software started with curiosity — taking things apart to understand how they work —
+      and grew into a pursuit of computer science where I found my footing in full-stack development,
+      data, and systems.
+    </p>
+    <p>
+      I enjoy working across the stack, from designing clean UIs to thinking through backend architecture
+      and data pipelines. I'm drawn to projects that have a real problem at the centre, and I care about
+      writing code that's readable and maintainable — not just code that runs.
+    </p>
+    <p>
+      Currently focused on growing my skills in machine learning, cloud infrastructure, and shipping
+      projects that I'm proud to put my name on — like this one.
+    </p>
+  </section>
+
+  <section class="about-section">
+    <h2>Hobbies</h2>
+    <div class="divider"></div>
+    <p class="hobbies-intro">
+      Outside of code I keep busy with a mix of creative and competitive pursuits.
+      Here's a glimpse.
+    </p>
+
+    <div class="carousel">
+      <button class="carousel-btn prev" (click)="prev()" aria-label="Previous">&#8592;</button>
+
+      <div class="carousel-track">
+        @for (image of images; track image.src; let i = $index) {
+          <div class="carousel-slide" [class.active]="i === current()" [class.prev]="i === (current() - 1 + images.length) % images.length" [class.next]="i === (current() + 1) % images.length">
+            <img [src]="image.src" [alt]="image.alt" draggable="false" />
+          </div>
+        }
+      </div>
+
+      <button class="carousel-btn next" (click)="next()" aria-label="Next">&#8594;</button>
+    </div>
+
+    <div class="carousel-dots">
+      @for (image of images; track image.src; let i = $index) {
+        <button
+          class="dot"
+          [class.active]="i === current()"
+          (click)="goTo(i)"
+          [attr.aria-label]="'Go to slide ' + (i + 1)"
+        ></button>
+      }
+    </div>
+  </section>
+
 </div>
