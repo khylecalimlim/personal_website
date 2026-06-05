@@ -68,17 +68,22 @@ p {
   &.side {
     flex: 1;
     cursor: pointer;
+    transition: transform 0.25s ease;
+
+    &:hover {
+      transform: scale(1.06);
+    }
 
     .slide-overlay {
       position: absolute;
       inset: 0;
       background: rgba(0, 0, 0, 0.45);
-      transition: background 0.2s;
+      transition: background 0.25s;
       border-radius: 10px;
     }
 
     &:hover .slide-overlay {
-      background: rgba(0, 0, 0, 0.2);
+      background: rgba(0, 0, 0, 0.15);
     }
   }
 }
