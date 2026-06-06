@@ -147,15 +147,28 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
 
   @HostListener('window:mousemove', ['$event'])
   onMouseMove(e: MouseEvent) {
-    const rect = this.canvasRef?.nativeElement.getBoundingClientRect();
-    if (rect) {
-      this.mouse.x = e.clientX - rect.left;
-      this.mouse.y = e.clientY - rect.top;
-    }
+    this.updateMouseFromClient(e.clientX, e.clientY);
   }
 
   @HostListener('window:mouseleave')
   onMouseLeave() { this.mouse = { x: -9999, y: -9999 }; }
+
+  @HostListener('window:touchmove', ['$event'])
+  onTouchMove(e: TouchEvent) {
+    const t = e.touches[0];
+    if (t) this.updateMouseFromClient(t.clientX, t.clientY);
+  }
+
+  @HostListener('window:touchend')
+  onTouchEnd() { this.mouse = { x: -9999, y: -9999 }; }
+
+  private updateMouseFromClient(clientX: number, clientY: number) {
+    const rect = this.canvasRef?.nativeElement.getBoundingClientRect();
+    if (rect) {
+      this.mouse.x = clientX - rect.left;
+      this.mouse.y = clientY - rect.top;
+    }
+  }
 
   @HostListener('window:keydown', ['$event'])
   onKey(e: KeyboardEvent) {
