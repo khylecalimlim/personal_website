@@ -28,19 +28,30 @@
       Here's a glimpse.
     </p>
 
-    <div class="carousel">
-      <div class="slide-wrapper side" (click)="prev()" title="Previous">
-        <img [src]="images[prevIndex].src" [alt]="images[prevIndex].alt" draggable="false" />
-        <div class="slide-overlay"></div>
-      </div>
+    <div class="carousel-outer"
+      (pointerdown)="onPointerDown($event)"
+      (pointermove)="onPointerMove($event)"
+      (pointerup)="onPointerUp()"
+      (pointercancel)="onPointerUp()">
 
-      <div class="slide-wrapper center">
-        <img [src]="images[current()].src" [alt]="images[current()].alt" draggable="false" />
-      </div>
+      <div class="carousel"
+        [style.transform]="'translateX(' + dragOffset() + 'px)'"
+        [class.is-dragging]="isDragging">
 
-      <div class="slide-wrapper side" (click)="next()" title="Next">
-        <img [src]="images[nextIndex].src" [alt]="images[nextIndex].alt" draggable="false" />
-        <div class="slide-overlay"></div>
+        <div class="slide-wrapper side" (click)="onSideClick('prev')" title="Previous">
+          <img [src]="images[prevIndex].src" [alt]="images[prevIndex].alt" draggable="false" />
+          <div class="slide-overlay"></div>
+        </div>
+
+        <div class="slide-wrapper center">
+          <img [src]="images[current()].src" [alt]="images[current()].alt" draggable="false" />
+        </div>
+
+        <div class="slide-wrapper side" (click)="onSideClick('next')" title="Next">
+          <img [src]="images[nextIndex].src" [alt]="images[nextIndex].alt" draggable="false" />
+          <div class="slide-overlay"></div>
+        </div>
+
       </div>
     </div>
 

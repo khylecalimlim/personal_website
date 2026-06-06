@@ -1,6 +1,8 @@
 import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+const DRAG_THRESHOLD = 60; // px needed to commit to next/prev
+
 interface CarouselImage {
   src: string;
   alt: string;
@@ -23,25 +25,46 @@ export class AboutComponent {
     { src: 'https://picsum.photos/seed/hobby5/800/500', alt: 'Hobby photo 5' },
   ];
 
-  current = signal(0);
+  current   = signal(0);
+  dragOffset = signal(0);
+  isDragging = false;
 
-  get prevIndex() {
-    return (this.current() - 1 + this.images.length) % this.images.length;
+  private dragStartX = 0;
+  private hasDragged = false;
+
+  get prevIndex() { return (this.current() - 1 + this.images.length) % this.images.length; }
+  get nextIndex()  { return (this.current() + 1) % this.images.length; }
+
+  prev() { this.current.update(i => (i - 1 + this.images.length) % this.images.length); }
+  next() { this.current.update(i => (i + 1) % this.images.length); }
+  goTo(index: number) { this.current.set(index); }
+
+  onSideClick(direction: 'prev' | 'next') {
+    if (this.hasDragged) return; // was a drag, not a tap
+    direction === 'prev' ? this.prev() : this.next();
   }
 
-  get nextIndex() {
-    return (this.current() + 1) % this.images.length;
+  onPointerDown(e: PointerEvent) {
+    this.isDragging = true;
+    this.hasDragged = false;
+    this.dragStartX = e.clientX;
+    (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
   }
 
-  prev() {
-    this.current.update(i => (i - 1 + this.images.length) % this.images.length);
+  onPointerMove(e: PointerEvent) {
+    if (!this.isDragging) return;
+    const delta = e.clientX - this.dragStartX;
+    if (Math.abs(delta) > 5) this.hasDragged = true;
+    this.dragOffset.set(delta);
   }
 
-  next() {
-    this.current.update(i => (i + 1) % this.images.length);
-  }
-
-  goTo(index: number) {
-    this.current.set(index);
+  onPointerUp() {
+    if (!this.isDragging) return;
+    this.isDragging = false;
+    const offset = this.dragOffset();
+    if (Math.abs(offset) > DRAG_THRESHOLD) {
+      offset < 0 ? this.next() : this.prev();
+    }
+    this.dragOffset.set(0);
   }
 }
