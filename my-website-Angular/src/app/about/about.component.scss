@@ -53,6 +53,7 @@ p {
   flex: 0 0 var(--slot-w, 33.333%);
   position: relative;
   overflow: hidden;
+  padding: 0 6px; // gap between slides
 
   img {
     width: 100%;
@@ -60,27 +61,35 @@ p {
     object-fit: cover;
     display: block;
     pointer-events: none;
+    border-radius: 8px;
   }
 
   &:not(.is-center) {
     cursor: pointer;
-    transition: transform 0.25s ease;
+    transform: scale(0.84);
+    transition: transform 0.3s ease;
 
     &:hover {
-      transform: scale(1.04);
-      z-index: 1;
+      transform: scale(0.92);
     }
+  }
+
+  &.is-center {
+    transition: transform 0.3s ease;
+    transform: scale(1);
   }
 }
 
 .slide-overlay {
   position: absolute;
-  inset: 0;
+  // inset accounts for the 6px padding on each side
+  inset: 0 6px;
+  border-radius: 8px;
   background: rgba(0, 0, 0, 0.5);
   transition: background 0.25s;
 
   .carousel-slide:hover & {
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.15);
   }
 }
 

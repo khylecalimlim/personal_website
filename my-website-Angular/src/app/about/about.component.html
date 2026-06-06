@@ -32,7 +32,8 @@
       (pointerdown)="onPointerDown($event)"
       (pointermove)="onPointerMove($event)"
       (pointerup)="onPointerUp()"
-      (pointercancel)="onPointerUp()">
+      (pointercancel)="onPointerUp()"
+      (click)="onCarouselClick($event)">
 
       <div class="carousel-track"
         [style.transform]="trackTransform"
@@ -40,8 +41,7 @@
 
         @for (img of imageSequence; track img.src; let i = $index) {
           <div class="carousel-slide"
-            [class.is-center]="i === 2"
-            (click)="onSlideClick(i)">
+            [class.is-center]="i === 2">
             <img [src]="img.src" [alt]="img.alt" draggable="false" />
             @if (i !== 2) {
               <div class="slide-overlay"></div>

@@ -107,11 +107,14 @@ export class AboutComponent implements AfterViewInit, OnDestroy {
     else                              { this.dragOffset.set(0); }
   }
 
-  // Clicking a non-centre slide navigates (only when it wasn't a drag)
-  onSlideClick(slotIndex: number) {
+  // Click anywhere on the carousel — determine which slot was clicked by x position
+  onCarouselClick(e: MouseEvent) {
     if (this.hasDragged) return;
-    if (slotIndex < 2)  this.commitPrev();
-    if (slotIndex > 2)  this.commitNext();
+    const rect = this.carouselOuter.nativeElement.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const slotW = this.containerWidth / 3;
+    if (x < slotW)          this.commitPrev();
+    else if (x > slotW * 2) this.commitNext();
   }
 
   // ── Commit helpers ─────────────────────────────────────────────────────────
