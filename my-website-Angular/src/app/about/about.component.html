@@ -28,35 +28,32 @@
       Here's a glimpse.
     </p>
 
-    <div class="carousel-outer"
+    <div class="carousel-outer" #carouselOuter
       (pointerdown)="onPointerDown($event)"
       (pointermove)="onPointerMove($event)"
       (pointerup)="onPointerUp()"
       (pointercancel)="onPointerUp()">
 
-      <div class="carousel"
-        [style.transform]="'translateX(' + dragOffset() + 'px)'"
-        [class.is-dragging]="isDragging">
+      <div class="carousel-track"
+        [style.transform]="trackTransform"
+        [style.transition]="trackTransition">
 
-        <div class="slide-wrapper side" (click)="onSideClick('prev')" title="Previous">
-          <img [src]="images[prevIndex].src" [alt]="images[prevIndex].alt" draggable="false" />
-          <div class="slide-overlay"></div>
-        </div>
-
-        <div class="slide-wrapper center">
-          <img [src]="images[current()].src" [alt]="images[current()].alt" draggable="false" />
-        </div>
-
-        <div class="slide-wrapper side" (click)="onSideClick('next')" title="Next">
-          <img [src]="images[nextIndex].src" [alt]="images[nextIndex].alt" draggable="false" />
-          <div class="slide-overlay"></div>
-        </div>
+        @for (img of imageSequence; track img.src; let i = $index) {
+          <div class="carousel-slide"
+            [class.is-center]="i === 2"
+            (click)="onSlideClick(i)">
+            <img [src]="img.src" [alt]="img.alt" draggable="false" />
+            @if (i !== 2) {
+              <div class="slide-overlay"></div>
+            }
+          </div>
+        }
 
       </div>
     </div>
 
     <div class="carousel-dots">
-      @for (image of images; track image.src; let i = $index) {
+      @for (img of images; track img.src; let i = $index) {
         <button
           class="dot"
           [class.active]="i === current()"
@@ -65,6 +62,7 @@
         ></button>
       }
     </div>
+
   </section>
 
 </div>

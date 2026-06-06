@@ -1,9 +1,6 @@
 .about-section {
   margin-bottom: 3.5rem;
-
-  &:last-child {
-    margin-bottom: 0;
-  }
+  &:last-child { margin-bottom: 0; }
 }
 
 h2 {
@@ -29,78 +26,65 @@ p {
   margin: 0 auto 1rem;
   text-align: center;
 
-  &:last-of-type {
-    margin-bottom: 0;
-  }
+  &:last-of-type { margin-bottom: 0; }
 }
 
-.hobbies-intro {
-  margin-bottom: 2rem !important;
-}
+.hobbies-intro { margin-bottom: 2rem !important; }
 
 // ── Carousel ─────────────────────────────────────────────────────────────────
+
 .carousel-outer {
-  max-width: 900px;
-  margin: 0 auto;
   overflow: hidden;
-  touch-action: pan-y; // browser handles vertical scroll, we handle horizontal swipe
+  touch-action: pan-y;       // browser owns vertical scroll; we own horizontal swipe
   user-select: none;
   cursor: grab;
-
   &:active { cursor: grabbing; }
 }
 
-.carousel {
+// Track holds 5 equal slots. --slot-w is set via JS = containerWidth / 3.
+// Layout: [buffer | prev | CENTER | next | buffer]
+// Base offset = -slotWidth so slot[2] is left-aligned with the container left edge,
+// and because each slot = container/3, three slots fill the container exactly.
+.carousel-track {
   display: flex;
-  align-items: center;
-  gap: 1rem;
-  transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-
-  &.is-dragging {
-    transition: none; // follow finger exactly, no lag
-  }
 }
 
-.slide-wrapper {
-  border-radius: 10px;
-  overflow: hidden;
-  flex-shrink: 0;
+.carousel-slide {
+  flex: 0 0 var(--slot-w, 33.333%);
   position: relative;
+  overflow: hidden;
 
   img {
     width: 100%;
     aspect-ratio: 16 / 10;
     object-fit: cover;
     display: block;
-    user-select: none;
+    pointer-events: none;
   }
 
-  &.center {
-    flex: 0 0 56%;
-  }
-
-  &.side {
-    flex: 1;
+  &:not(.is-center) {
     cursor: pointer;
     transition: transform 0.25s ease;
 
     &:hover {
-      transform: scale(1.06);
-    }
-
-    .slide-overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.45);
-      transition: background 0.25s;
-      border-radius: 10px;
-    }
-
-    &:hover .slide-overlay {
-      background: rgba(0, 0, 0, 0.15);
+      transform: scale(1.04);
+      z-index: 1;
     }
   }
 }
+
+.slide-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  transition: background 0.25s;
+
+  .carousel-slide:hover & {
+    background: rgba(0, 0, 0, 0.2);
+  }
+}
+
+// ── Dots ─────────────────────────────────────────────────────────────────────
 
 .carousel-dots {
   display: flex;
@@ -124,7 +108,5 @@ p {
     transform: scale(1.3);
   }
 
-  &:hover:not(.active) {
-    background-color: #555;
-  }
+  &:hover:not(.active) { background-color: #555; }
 }
