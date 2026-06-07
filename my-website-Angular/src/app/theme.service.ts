@@ -17,6 +17,11 @@ export class ThemeService {
   applyFontToHeader = signal(false);
   applyTextColorToHeader = signal(false);
 
+  // TODO(mobile-fonts): fonts like Wingdings and custom Google Fonts (Fira Code, Inter, etc.)
+  // don't render correctly on mobile because they aren't installed on the device and aren't
+  // loaded via @font-face / Google Fonts <link>. Fix: add a <link> tag in index.html for each
+  // web font, and consider hiding or labelling system-only fonts (Wingdings, Comic Sans) that
+  // will silently fall back to a generic family on iOS/Android.
   readonly fontOptions: FontOption[] = [
     { label: 'Comic Sans',        value: "'Comic Sans MS', 'Comic Sans', cursive" },
     { label: 'Fira Code',         value: "'Fira Code', monospace" },

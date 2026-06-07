@@ -39,7 +39,7 @@
         [style.transform]="trackTransform"
         [style.transition]="trackTransition">
 
-        @for (img of imageSequence; track img.src; let i = $index) {
+        @for (img of imageSequence(); track img.src; let i = $index) {
           <div class="carousel-slide"
             [class.is-center]="i === 2">
             <img [src]="img.src" [alt]="img.alt" draggable="false" />

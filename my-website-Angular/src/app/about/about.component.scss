@@ -47,6 +47,7 @@ p {
 // and because each slot = container/3, three slots fill the container exactly.
 .carousel-track {
   display: flex;
+  will-change: transform; // hint the browser to use a compositor layer — keeps the slide animation off the main thread
 }
 
 .carousel-slide {
@@ -54,6 +55,7 @@ p {
   position: relative;
   overflow: hidden;
   padding: 0 6px; // gap between slides
+  will-change: transform; // same — the is-center scale transition runs on every slide change
 
   img {
     width: 100%;
