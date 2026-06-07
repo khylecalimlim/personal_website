@@ -101,7 +101,11 @@ export class AboutComponent implements AfterViewInit, OnDestroy {
   }
 
   get trackTransition(): string {
-    return (this.isDragging || this.snapping) ? 'none' : `transform ${SLIDE_DURATION}ms ease`;
+    // ease-out: full speed from frame one, decelerating into the snap. `ease`
+    // ramps up from a standstill, which reads as a stutter/pause right at the
+    // moment of release — exactly when the flick's momentum should carry
+    // straight into the spin with no perceptible gap.
+    return (this.isDragging || this.snapping) ? 'none' : `transform ${SLIDE_DURATION}ms ease-out`;
   }
 
   goTo(index: number) { this.current.set(index); }
