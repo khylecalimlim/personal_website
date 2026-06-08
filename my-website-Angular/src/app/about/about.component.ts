@@ -140,34 +140,45 @@ export class AboutComponent implements AfterViewInit, OnDestroy {
     if (!this.isDragging) return;
     this.isDragging = false;
 
-    const offset   = this.dragOffset();
-    const distance = Math.abs(offset);
-    const speed    = Math.abs(this.velocity);
-    const slotW    = this.containerWidth / 3;
+    const offset = this.dragOffset();
 
-    // Not a deliberate swipe — too short and too slow — snap back to centre.
-    if (distance <= DRAG_THRESHOLD && speed <= SPIN_VELOCITY) {
-      this.dragOffset.set(0);
-      return;
-    }
-    this.hasDragged = true;
+    // TODO(carousel-spin): momentum "spin" (multi-slide rotation on fast/far
+    // flicks, distance-floor + velocity-bonus step count) is disabled for now
+    // — it still introduced lag and felt unpredictable in practice. Code kept
+    // here so it can be revisited without rebuilding from scratch:
+    //
+    // const distance = Math.abs(offset);
+    // const speed    = Math.abs(this.velocity);
+    // const slotW    = this.containerWidth / 3;
+    //
+    // // Not a deliberate swipe — too short and too slow — snap back to centre.
+    // if (distance <= DRAG_THRESHOLD && speed <= SPIN_VELOCITY) {
+    //   this.dragOffset.set(0);
+    //   return;
+    // }
+    // this.hasDragged = true;
+    //
+    // // Prefer the drag's direction; fall back to the flick's velocity for
+    // // quick taps that release before the pointer travels meaningfully.
+    // const direction: 1 | -1 = (distance > 1 ? offset < 0 : this.velocity < 0) ? 1 : -1;
+    //
+    // // Distance is the floor: dragging across N picture-widths spins at
+    // // least N slides — e.g. a slow 2-picture drag rotates exactly 2.
+    // const distanceSteps = Math.max(1, Math.floor(distance / slotW));
+    //
+    // // Velocity adds extra slides on top, scaled by how far past the spin
+    // // threshold the flick was — e.g. a fast 2-picture drag rotates 2 plus
+    // // however many extra slides the speed earns.
+    // const velocityExtra = speed > SPIN_VELOCITY
+    //   ? Math.floor((speed - SPIN_VELOCITY) / SPIN_VELOCITY)
+    //   : 0;
+    //
+    // this.spin(direction, distanceSteps + velocityExtra);
 
-    // Prefer the drag's direction; fall back to the flick's velocity for
-    // quick taps that release before the pointer travels meaningfully.
-    const direction: 1 | -1 = (distance > 1 ? offset < 0 : this.velocity < 0) ? 1 : -1;
-
-    // Distance is the floor: dragging across N picture-widths spins at
-    // least N slides — e.g. a slow 2-picture drag rotates exactly 2.
-    const distanceSteps = Math.max(1, Math.floor(distance / slotW));
-
-    // Velocity adds extra slides on top, scaled by how far past the spin
-    // threshold the flick was — e.g. a fast 2-picture drag rotates 2 plus
-    // however many extra slides the speed earns.
-    const velocityExtra = speed > SPIN_VELOCITY
-      ? Math.floor((speed - SPIN_VELOCITY) / SPIN_VELOCITY)
-      : 0;
-
-    this.spin(direction, distanceSteps + velocityExtra);
+    // Single-slide commit (previous, stable behaviour).
+    if (offset < -DRAG_THRESHOLD)      { this.hasDragged = true; this.spin(1, 1); }
+    else if (offset > DRAG_THRESHOLD)  { this.hasDragged = true; this.spin(-1, 1); }
+    else                               { this.dragOffset.set(0); }
   }
 
   // Click anywhere on the carousel — determine which slot was clicked by x position
@@ -182,13 +193,13 @@ export class AboutComponent implements AfterViewInit, OnDestroy {
 
   // ── Spin / commit ──────────────────────────────────────────────────────────
 
-  // Advances `steps` slides in `direction`, one at a time (uncapped — a hard
-  // enough flick can spin through as many images as it earns). Each step
-  // slides a single slot then snaps the track back instantly (same
-  // commit→snap cycle as a normal swipe), and — because `current` is a
-  // signal — `imageSequence` and the `is-center` binding recompute and stay
-  // in sync at every step, so the focal highlight tracks the spin rather
-  // than jumping straight to the final image.
+  // Advances `steps` slides in `direction`, one at a time, sliding a single
+  // slot then snapping the track back instantly. Currently always called
+  // with steps = 1 (multi-step "spin" is disabled — see TODO in onPointerUp)
+  // but it stays recursive/uncapped so re-enabling the spin is a one-line
+  // change. Because `current` is a signal, `imageSequence` and the
+  // `is-center` binding recompute and stay in sync at every step, so the
+  // focal highlight always tracks the currently-centred slide.
   private spin(direction: 1 | -1, steps: number) {
     if (steps <= 0) return;
 
