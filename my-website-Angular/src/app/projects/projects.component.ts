@@ -22,7 +22,7 @@ export class ProjectsComponent {
   projects: Project[] = [
     {
       title: 'Chess Game + AI',
-      href: '#',
+      href: 'https://github.com/khylecalimlim/Chess',
       status: 'wip',
       statusLabel: 'In Progress',
       description: 'A fully playable chess engine with a custom-built AI opponent using minimax with alpha-beta pruning. Includes full rule implementation — castling, en passant, promotion, check/checkmate — with adjustable difficulty levels.',
