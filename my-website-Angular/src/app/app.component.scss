@@ -333,3 +333,28 @@
     min-width: 0;
   }
 }
+
+// ── Click-anywhere star/spark burst ──────────────────────────────────────────
+
+.spark {
+  position: fixed;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+  user-select: none;
+  z-index: 2000;
+  line-height: 1;
+  will-change: transform, opacity;
+  animation: spark-burst 0.65s ease-out forwards;
+}
+
+@keyframes spark-burst {
+  from {
+    transform: translate(-50%, -50%) translate(0, 0) rotate(0deg) scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: translate(-50%, -50%) translate(var(--dx), var(--dy)) rotate(var(--rot)) scale(0.15);
+    opacity: 0;
+  }
+}

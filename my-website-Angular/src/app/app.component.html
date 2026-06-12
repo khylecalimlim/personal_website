@@ -93,3 +93,15 @@
 <main [style.background-color]="theme.backgroundColor()" [style.color]="theme.textColor()" [style.font-family]="theme.fontFamily()">
   <router-outlet />
 </main>
+
+@for (spark of sparks(); track spark.id) {
+  <span class="spark"
+    [style.left.px]="spark.x"
+    [style.top.px]="spark.y"
+    [style.font-size.px]="spark.size"
+    [style.color]="spark.color"
+    [style.--dx.px]="spark.dx"
+    [style.--dy.px]="spark.dy"
+    [style.--rot.deg]="spark.rotation"
+  >{{ spark.glyph }}</span>
+}
