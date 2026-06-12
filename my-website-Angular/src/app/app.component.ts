@@ -33,6 +33,8 @@ export class AppComponent {
 
   // Click-anywhere star/spark burst — purely decorative, in the same
   // playful spirit as the home page particle background and easter eggs.
+  // TODO: add a settings option to change/alter the click spark animation
+  // (e.g. glyphs, colors, intensity, or disable entirely).
   sparks = signal<Spark[]>([]);
   private nextSparkId = 0;
 
