@@ -17,7 +17,12 @@
               {{ project.title }}
               <span class="link-icon">↗</span>
             </a>
-            <span class="status" [class]="project.status">{{ project.statusLabel }}</span>
+            <div class="header-right">
+              @if (project.playHref) {
+                <a [href]="project.playHref" class="play-link" target="_blank" rel="noopener">Play</a>
+              }
+              <span class="status" [class]="project.status">{{ project.statusLabel }}</span>
+            </div>
           </div>
           <p class="description">{{ project.description }}</p>
           <div class="tags">

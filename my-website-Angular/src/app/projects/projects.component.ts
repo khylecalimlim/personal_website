@@ -4,6 +4,7 @@ import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-
 interface Project {
   title: string;
   href: string;
+  playHref?: string;
   status: 'wip' | 'complete';
   statusLabel: string;
   description: string;
@@ -23,6 +24,7 @@ export class ProjectsComponent {
     {
       title: 'Chess Game + AI',
       href: 'https://github.com/khylecalimlim/Chess',
+      playHref: 'https://khylecalimlim.github.io/Chess/',
       status: 'wip',
       statusLabel: 'In Progress',
       description: 'A fully playable chess engine with a custom-built AI opponent using minimax with alpha-beta pruning. Includes full rule implementation — castling, en passant, promotion, check/checkmate — with adjustable difficulty levels.',

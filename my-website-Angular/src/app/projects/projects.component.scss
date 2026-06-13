@@ -121,6 +121,30 @@
   }
 }
 
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.play-link {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  text-decoration: none;
+  color: #5be05c;
+  background-color: rgba(91, 224, 92, 0.12);
+  border: 1px solid rgba(91, 224, 92, 0.25);
+  transition: background-color 0.2s, border-color 0.2s;
+
+  &:hover {
+    background-color: rgba(91, 224, 92, 0.22);
+    border-color: rgba(91, 224, 92, 0.4);
+  }
+}
+
 .status {
   font-size: 0.72rem;
   font-weight: 600;
