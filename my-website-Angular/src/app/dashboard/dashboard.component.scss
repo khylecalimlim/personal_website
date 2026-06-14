@@ -1,0 +1,36 @@
+.subtitle {
+  color: #888;
+  margin-top: 0.25rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+}
+
+.dashboard-section {
+  margin-bottom: 2rem;
+
+  h2 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid #2e2e2e;
+  }
+}
+
+.link-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  a {
+    display: inline-block;
+    font-size: 0.95rem;
+    color: #5b8dee;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
