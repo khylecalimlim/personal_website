@@ -5,23 +5,27 @@
   @for (section of sections; track section.title) {
     <section class="command-center-section">
       <h2>{{ section.title }}</h2>
-      <ul class="link-list" cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="drop(section, $event)">
-        @for (link of section.links; track link.href) {
-          <li
-            class="link-card"
-            [class.jiggle]="link.jiggling"
-            [class.inverted]="link.inverted"
-            (click)="pop(link)"
-            (animationend)="link.jiggling = false"
-            cdkDrag
-          >
-            <a [href]="link.href" class="link-text" target="_blank" rel="noopener">
-              {{ link.label }}
-              <span class="link-icon">↗</span>
-            </a>
-          </li>
-        }
-      </ul>
+      @if (section.links.length) {
+        <ul class="link-list" cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="drop(section, $event)">
+          @for (link of section.links; track link.href) {
+            <li
+              class="link-card"
+              [class.jiggle]="link.jiggling"
+              [class.inverted]="link.inverted"
+              (click)="pop(link)"
+              (animationend)="link.jiggling = false"
+              cdkDrag
+            >
+              <a [href]="link.href" class="link-text" target="_blank" rel="noopener">
+                {{ link.label }}
+                <span class="link-icon">↗</span>
+              </a>
+            </li>
+          }
+        </ul>
+      } @else {
+        <p class="empty-state">Nothing here yet.</p>
+      }
     </section>
   }
 </div>

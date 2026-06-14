@@ -32,6 +32,10 @@ export class CommandCenterComponent {
       ]
     },
     {
+      title: 'Completed',
+      links: []
+    },
+    {
       title: 'Job Applications',
       links: [
         { label: 'LinkedIn', href: 'https://www.linkedin.com/in/khyle-calimlim-3b57b91b5/' },
