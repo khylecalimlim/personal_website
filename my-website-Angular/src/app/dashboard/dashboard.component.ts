@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 interface DashboardLink {
   label: string;
   href: string;
+  popping?: boolean;
 }
 
 interface DashboardSection {
@@ -37,4 +38,8 @@ export class DashboardComponent {
       ]
     }
   ];
+
+  pop(link: DashboardLink): void {
+    link.popping = true;
+  }
 }
