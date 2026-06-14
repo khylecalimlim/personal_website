@@ -1,26 +1,27 @@
 import { Component } from '@angular/core';
 import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
 
-interface DashboardLink {
+interface CommandCenterLink {
   label: string;
   href: string;
-  popping?: boolean;
+  jiggling?: boolean;
+  inverted?: boolean;
 }
 
-interface DashboardSection {
+interface CommandCenterSection {
   title: string;
-  links: DashboardLink[];
+  links: CommandCenterLink[];
 }
 
 @Component({
-  selector: 'app-dashboard',
+  selector: 'app-command-center',
   standalone: true,
   imports: [DragDropModule],
-  templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.scss'
+  templateUrl: './command-center.component.html',
+  styleUrl: './command-center.component.scss'
 })
-export class DashboardComponent {
-  sections: DashboardSection[] = [
+export class CommandCenterComponent {
+  sections: CommandCenterSection[] = [
     {
       title: 'Learning Progress',
       links: [
@@ -40,11 +41,12 @@ export class DashboardComponent {
     }
   ];
 
-  pop(link: DashboardLink): void {
-    link.popping = true;
+  pop(link: CommandCenterLink): void {
+    link.inverted = !link.inverted;
+    link.jiggling = true;
   }
 
-  drop(section: DashboardSection, event: CdkDragDrop<DashboardLink[]>): void {
+  drop(section: CommandCenterSection, event: CdkDragDrop<CommandCenterLink[]>): void {
     moveItemInArray(section.links, event.previousIndex, event.currentIndex);
   }
 }

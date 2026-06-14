@@ -4,9 +4,9 @@ import { AboutComponent } from './about/about.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { ResumeComponent } from './resume/resume.component';
 import { FeedbackComponent } from './feedback/feedback.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { CommandCenterComponent } from './command-center/command-center.component';
 
-// TODO: the "dashboard" route/nav link below is currently public - make it
+// TODO: the "command-center" route/nav link below is currently public - make it
 // hidden/inaccessible to anyone but me. Auth options to consider (cheapest first):
 //   1. Client-side passphrase gate on a hidden, unlinked route (e.g. /dash-<random>):
 //      compare a hashed passphrase, unlock stored in localStorage. Free, zero infra,
@@ -26,6 +26,6 @@ export const routes: Routes = [
   { path: 'projects', component: ProjectsComponent },
   { path: 'resume', component: ResumeComponent },
   { path: 'feedback', component: FeedbackComponent },
-  { path: 'dashboard', component: DashboardComponent },
+  { path: 'command-center', component: CommandCenterComponent },
   { path: '**', redirectTo: '' }
 ];

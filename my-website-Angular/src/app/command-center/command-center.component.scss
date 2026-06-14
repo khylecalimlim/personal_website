@@ -5,7 +5,7 @@
   font-size: 0.95rem;
 }
 
-.dashboard-section {
+.command-center-section {
   margin-bottom: 2rem;
 
   h2 {
@@ -47,7 +47,7 @@
   border-radius: 10px;
   padding: 1rem 1.25rem;
   cursor: grab;
-  transition: border-color 0.2s, background-color 0.2s, transform 0.15s, box-shadow 0.2s;
+  transition: border-color 0.2s, background-color 0.2s, color 0.2s, transform 0.15s, box-shadow 0.2s;
 
   &:hover {
     border-color: #444;
@@ -60,8 +60,19 @@
     cursor: grabbing;
   }
 
-  &.pop {
+  &.jiggle {
     animation: card-pop 0.4s ease;
+  }
+
+  &.inverted {
+    background-color: #fff;
+    border-color: #fff;
+    color: #000;
+
+    &:hover {
+      background-color: #f0f0f0;
+      border-color: #f0f0f0;
+    }
   }
 
   // While being dragged
@@ -72,6 +83,14 @@
 
   &.cdk-drag-placeholder {
     opacity: 0.3;
+  }
+
+  // Disable hover/jiggle transitions while dragging so the card tracks the
+  // cursor immediately instead of easing into position
+  &.cdk-drag-dragging,
+  &.cdk-drag-preview {
+    transition: none;
+    animation: none;
   }
 }
 
