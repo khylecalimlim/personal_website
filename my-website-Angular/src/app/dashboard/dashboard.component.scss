@@ -20,17 +20,37 @@
 .link-list {
   list-style: none;
   display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
 
-  a {
-    display: inline-block;
-    font-size: 0.95rem;
+.link-card {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: inherit;
+  text-decoration: none;
+  background-color: #1e1e1e;
+  border: 1px solid #2e2e2e;
+  border-radius: 8px;
+  padding: 0.6rem 1.1rem;
+  transition: border-color 0.2s, color 0.2s, background-color 0.2s;
+
+  &:hover {
     color: #5b8dee;
-    text-decoration: none;
+    border-color: #5b8dee;
+    background-color: #252525;
+  }
 
-    &:hover {
-      text-decoration: underline;
-    }
+  .link-icon {
+    font-size: 0.85rem;
+    opacity: 0.5;
+    transition: opacity 0.2s;
+  }
+
+  &:hover .link-icon {
+    opacity: 1;
   }
 }
