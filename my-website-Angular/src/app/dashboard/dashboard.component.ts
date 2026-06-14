@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
 
 interface DashboardLink {
   label: string;
@@ -14,7 +15,7 @@ interface DashboardSection {
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [],
+  imports: [DragDropModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
@@ -41,5 +42,9 @@ export class DashboardComponent {
 
   pop(link: DashboardLink): void {
     link.popping = true;
+  }
+
+  drop(section: DashboardSection, event: CdkDragDrop<DashboardLink[]>): void {
+    moveItemInArray(section.links, event.previousIndex, event.currentIndex);
   }
 }

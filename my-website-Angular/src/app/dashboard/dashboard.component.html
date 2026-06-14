@@ -5,13 +5,14 @@
   @for (section of sections; track section.title) {
     <section class="dashboard-section">
       <h2>{{ section.title }}</h2>
-      <ul class="link-list">
+      <ul class="link-list" cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="drop(section, $event)">
         @for (link of section.links; track link.href) {
           <li
             class="link-card"
             [class.pop]="link.popping"
             (click)="pop(link)"
             (animationend)="link.popping = false"
+            cdkDrag
           >
             <a [href]="link.href" class="link-text" target="_blank" rel="noopener">
               {{ link.label }}
