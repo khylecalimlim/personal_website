@@ -8,7 +8,8 @@ import { FeedbackComponent } from './feedback/feedback.component';
 // TODO: add a private "dashboard" section, hidden/inaccessible to anyone but me, with:
 //   - "Job Applications" sub-section: links to LinkedIn, BuiltIn, Indeed
 //   - "Learning Progress" sub-section: links to NeetCode/LeetCode profile, and current
-//     courses/certs (e.g. https://anthropic.skilljar.com/claude-code-101, future Azure certs)
+//     courses/certs (e.g. https://anthropic.skilljar.com/claude-code-101, future Azure certs,
+//     https://www.docker.com/trainings/)
 // Auth options to consider (cheapest first):
 //   1. Client-side passphrase gate on a hidden, unlinked route (e.g. /dash-<random>):
 //      compare a hashed passphrase, unlock stored in localStorage. Free, zero infra,
