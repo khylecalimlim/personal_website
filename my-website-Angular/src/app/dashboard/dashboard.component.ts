@@ -22,7 +22,7 @@ export class DashboardComponent {
     {
       title: 'Learning Progress',
       links: [
-        { label: 'NeetCode', href: 'https://neetcode.io/' },
+        { label: 'NeetCode', href: 'https://neetcode.io/roadmap' },
         { label: 'LeetCode', href: 'https://leetcode.com/' },
         { label: 'Claude Code 101', href: 'https://anthropic.skilljar.com/claude-code-101' },
         { label: 'Docker Training', href: 'https://www.docker.com/trainings/' }
@@ -31,9 +31,9 @@ export class DashboardComponent {
     {
       title: 'Job Applications',
       links: [
-        { label: 'LinkedIn', href: 'https://www.linkedin.com/' },
-        { label: 'BuiltIn', href: 'https://builtin.com/' },
-        { label: 'Indeed', href: 'https://www.indeed.com/' }
+        { label: 'LinkedIn', href: 'https://www.linkedin.com/in/khyle-calimlim-3b57b91b5/' },
+        { label: 'BuiltIn', href: 'https://builtin.com/?application-tracker#application-tracker' },
+        { label: 'Indeed', href: 'https://www.indeed.com/?from=gnav-viewjob' }
       ]
     }
   ];
