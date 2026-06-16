@@ -6,6 +6,16 @@ import { ResumeComponent } from './resume/resume.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { CommandCenterComponent } from './command-center/command-center.component';
 
+// TODO: add user sign-in with external auth + 2FA (practice exercise, no real user
+// profiles needed). Suggested approach:
+//   - Provider: Firebase Auth (free tier) — supports Google/GitHub OAuth + TOTP 2FA
+//     out of the box, well-documented with Angular, and ties cleanly into the
+//     command-center gating TODO below.
+//   - Add a /login route (new LoginComponent) with an OAuth button and a 2FA prompt.
+//   - Use an Angular route guard (CanActivate) to protect any routes that require auth.
+//   - 2FA options: Firebase supports TOTP (authenticator app) and SMS MFA natively.
+//     TOTP (e.g. Google Authenticator) is free; SMS costs per message.
+//
 // TODO: the "command-center" route/nav link below is currently public - make it
 // hidden/inaccessible to anyone but me. Auth options to consider (cheapest first):
 //   1. Client-side passphrase gate on a hidden, unlinked route (e.g. /dash-<random>):
