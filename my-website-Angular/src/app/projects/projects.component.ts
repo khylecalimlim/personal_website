@@ -28,8 +28,7 @@ export class ProjectsComponent {
       status: 'wip',
       statusLabel: 'In Progress',
       description: 'A fully playable chess engine with a custom-built AI opponent using minimax with alpha-beta pruning. Includes full rule implementation — castling, en passant, promotion, check/checkmate — with adjustable difficulty levels.',
-      // TODO: update tags - project now uses TypeScript/React (Vite), not Python/PyTorch
-      tags: ['Python', 'AI / Minimax', 'React', 'PyTorch']
+      tags: ['TypeScript', 'React', 'Vite', 'AI / Minimax']
     },
     {
       title: 'Music League Analytics',
