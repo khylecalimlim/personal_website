@@ -96,6 +96,19 @@
         </label>
       </div>
 
+      <div class="setting-row">
+        <label>Click spark style</label>
+        <select
+          class="font-select"
+          [value]="theme.sparkPreset()"
+          (change)="theme.sparkPreset.set($any($event.target).value)"
+        >
+          @for (opt of theme.sparkPresetOptions; track opt.key) {
+            <option [value]="opt.key">{{ opt.label }}</option>
+          }
+        </select>
+      </div>
+
       <button class="default-btn" (click)="theme.reset()">Default</button>
     </div>
   }

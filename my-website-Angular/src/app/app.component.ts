@@ -1,6 +1,6 @@
 import { Component, inject, signal, HostListener } from '@angular/core';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
-import { ThemeService } from './theme.service';
+import { SPARK_PRESETS, ThemeService } from './theme.service';
 
 interface Spark {
   id: number;
@@ -16,8 +16,6 @@ interface Spark {
 
 const SPARK_COUNT    = 6;
 const SPARK_LIFETIME = 650; // ms — must match the CSS animation duration
-const SPARK_GLYPHS   = ['✦', '✧', '★', '✷', '✺'];
-const SPARK_COLORS   = ['#5b8dee', '#f5d76e', '#e8e8e8', '#9b8cf2'];
 
 @Component({
   selector: 'app-root',
@@ -53,6 +51,7 @@ export class AppComponent {
   onDocumentClick(e: MouseEvent) {
     if (!this.theme.clickSparksEnabled()) return;
 
+    const preset = SPARK_PRESETS[this.theme.sparkPreset()];
     const burst: Spark[] = Array.from({ length: SPARK_COUNT }, () => {
       const angle    = Math.random() * Math.PI * 2;
       const distance = 28 + Math.random() * 42;
@@ -64,8 +63,8 @@ export class AppComponent {
         dy: Math.sin(angle) * distance,
         rotation: (Math.random() - 0.5) * 360,
         size: 10 + Math.random() * 10,
-        glyph: SPARK_GLYPHS[Math.floor(Math.random() * SPARK_GLYPHS.length)],
-        color: SPARK_COLORS[Math.floor(Math.random() * SPARK_COLORS.length)],
+        glyph: preset.glyphs[Math.floor(Math.random() * preset.glyphs.length)],
+        color: preset.colors[Math.floor(Math.random() * preset.colors.length)],
       };
     });
 

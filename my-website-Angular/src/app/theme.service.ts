@@ -9,6 +9,37 @@ export interface FontOption {
   value: string;
 }
 
+export interface SparkPreset {
+  label: string;
+  glyphs: string[];
+  colors: string[];
+}
+
+export const DEFAULT_SPARK_PRESET = 'stars';
+
+export const SPARK_PRESETS: Record<string, SparkPreset> = {
+  stars: {
+    label: 'Stars',
+    glyphs: ['✦', '✧', '★', '✷', '✺'],
+    colors: ['#5b8dee', '#f5d76e', '#e8e8e8', '#9b8cf2'],
+  },
+  hearts: {
+    label: 'Hearts',
+    glyphs: ['♥', '❥', '💕', '💖', '💗'],
+    colors: ['#ff6b9d', '#ff8fab', '#ffc2d1', '#e0529c'],
+  },
+  shapes: {
+    label: 'Shapes',
+    glyphs: ['●', '▲', '■', '◆', '✚'],
+    colors: ['#5be05c', '#5b8dee', '#f5d76e', '#e8e8e8'],
+  },
+  fire: {
+    label: 'Fire',
+    glyphs: ['🔥', '✨', '💥', '⚡', '🌟'],
+    colors: ['#ff7a3d', '#ff4d4d', '#ffce4d', '#ff9d4d'],
+  },
+};
+
 @Injectable({ providedIn: 'root' })
 export class ThemeService {
   // TODO: applyFontToHeader / applyTextColorToHeader currently only affect the
@@ -20,6 +51,12 @@ export class ThemeService {
   applyFontToHeader = signal(false);
   applyTextColorToHeader = signal(false);
   clickSparksEnabled = signal(true);
+  sparkPreset = signal(DEFAULT_SPARK_PRESET);
+
+  readonly sparkPresetOptions = Object.entries(SPARK_PRESETS).map(([key, preset]) => ({
+    key,
+    label: preset.label,
+  }));
 
   // Web fonts (Fira Code, Inter, Lato, Merriweather, Nunito, Oswald, Playfair
   // Display, Poppins, Raleway, Roboto, Space Mono, Ubuntu) are loaded via the
@@ -60,5 +97,6 @@ export class ThemeService {
     this.applyFontToHeader.set(false);
     this.applyTextColorToHeader.set(false);
     this.clickSparksEnabled.set(true);
+    this.sparkPreset.set(DEFAULT_SPARK_PRESET);
   }
 }
