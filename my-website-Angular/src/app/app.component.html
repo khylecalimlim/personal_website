@@ -82,6 +82,20 @@
         </label>
       </div>
 
+      <div class="setting-row">
+        <label>Enable click sparks</label>
+        <label class="toggle">
+          <input
+            type="checkbox"
+            [checked]="theme.clickSparksEnabled()"
+            (change)="theme.clickSparksEnabled.set($any($event.target).checked)"
+          />
+          <span class="toggle-track">
+            <span class="toggle-thumb"></span>
+          </span>
+        </label>
+      </div>
+
       <button class="default-btn" (click)="theme.reset()">Default</button>
     </div>
   }

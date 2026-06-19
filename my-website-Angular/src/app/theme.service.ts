@@ -19,6 +19,7 @@ export class ThemeService {
   fontFamily = signal(DEFAULT_FONT);
   applyFontToHeader = signal(false);
   applyTextColorToHeader = signal(false);
+  clickSparksEnabled = signal(true);
 
   // Web fonts (Fira Code, Inter, Lato, Merriweather, Nunito, Oswald, Playfair
   // Display, Poppins, Raleway, Roboto, Space Mono, Ubuntu) are loaded via the
@@ -58,5 +59,6 @@ export class ThemeService {
     this.fontFamily.set(DEFAULT_FONT);
     this.applyFontToHeader.set(false);
     this.applyTextColorToHeader.set(false);
+    this.clickSparksEnabled.set(true);
   }
 }
