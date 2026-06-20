@@ -48,7 +48,7 @@ export class ProjectsComponent {
     },
     {
       title: 'ESPN Fantasy Football Drafter',
-      href: '#',
+      href: 'https://github.com/khylecalimlim/ESPNFantasyPredictor',
       status: 'wip',
       statusLabel: 'In Progress',
       description: 'A draft assistant and player predictor for ESPN Fantasy Football leagues. Analyses historical performance, injury data, and matchup schedules to recommend optimal picks in real time during a draft, with season-long projections to guide roster decisions.',
