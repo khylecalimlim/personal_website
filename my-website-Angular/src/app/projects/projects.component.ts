@@ -31,6 +31,14 @@ export class ProjectsComponent {
       tags: ['TypeScript', 'React', 'Vite', 'AI / Minimax']
     },
     {
+      title: 'ESPN Fantasy Football Drafter',
+      href: 'https://github.com/khylecalimlim/ESPNFantasyPredictor',
+      status: 'wip',
+      statusLabel: 'In Progress',
+      description: 'A draft assistant and player predictor for ESPN Fantasy Football leagues. Analyses historical performance, injury data, and matchup schedules to recommend optimal picks in real time during a draft, with season-long projections to guide roster decisions.',
+      tags: ['Python', 'Jupyter', 'Machine Learning', 'Pandas', 'scikit-learn']
+    },
+    {
       title: 'Music League Analytics',
       href: '#',
       status: 'wip',
@@ -45,14 +53,6 @@ export class ProjectsComponent {
       statusLabel: 'In Progress',
       description: 'A full container lifecycle project — Dockerising a web app, orchestrating it with Compose, then migrating to Kubernetes manifests with Ingress and TLS. The goal is real infra knowledge, not just the app.',
       tags: ['Docker', 'Kubernetes', 'k3s', 'Helm', 'GitHub Actions']
-    },
-    {
-      title: 'ESPN Fantasy Football Drafter',
-      href: 'https://github.com/khylecalimlim/ESPNFantasyPredictor',
-      status: 'wip',
-      statusLabel: 'In Progress',
-      description: 'A draft assistant and player predictor for ESPN Fantasy Football leagues. Analyses historical performance, injury data, and matchup schedules to recommend optimal picks in real time during a draft, with season-long projections to guide roster decisions.',
-      tags: ['Python', 'Jupyter', 'Machine Learning', 'Pandas', 'scikit-learn']
     }
   ];
 
