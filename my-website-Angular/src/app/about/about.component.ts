@@ -20,13 +20,16 @@ interface CarouselImage {
 export class AboutComponent implements AfterViewInit, OnDestroy {
   @ViewChild('carouselOuter') carouselOuter!: ElementRef<HTMLDivElement>;
 
-  // TODO: replace placeholder URLs with real hobby photos
+  // TODO: replace placeholder images with real hobby photos
+  // Local SVG placeholders (public/about/) - previously used picsum.photos, which had
+  // an outage (503s/timeouts), breaking the carousel. Local files have no external
+  // dependency and can't go down.
   images: CarouselImage[] = [
-    { src: 'https://picsum.photos/seed/hobby1/800/500', alt: 'Hobby photo 1' },
-    { src: 'https://picsum.photos/seed/hobby2/800/500', alt: 'Hobby photo 2' },
-    { src: 'https://picsum.photos/seed/hobby3/800/500', alt: 'Hobby photo 3' },
-    { src: 'https://picsum.photos/seed/hobby4/800/500', alt: 'Hobby photo 4' },
-    { src: 'https://picsum.photos/seed/hobby5/800/500', alt: 'Hobby photo 5' },
+    { src: 'about/hobby1.svg', alt: 'Hobby photo 1' },
+    { src: 'about/hobby2.svg', alt: 'Hobby photo 2' },
+    { src: 'about/hobby3.svg', alt: 'Hobby photo 3' },
+    { src: 'about/hobby4.svg', alt: 'Hobby photo 4' },
+    { src: 'about/hobby5.svg', alt: 'Hobby photo 5' },
   ];
 
   current    = signal(0);
