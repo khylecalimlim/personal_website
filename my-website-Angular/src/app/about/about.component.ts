@@ -20,16 +20,16 @@ interface CarouselImage {
 export class AboutComponent implements AfterViewInit, OnDestroy {
   @ViewChild('carouselOuter') carouselOuter!: ElementRef<HTMLDivElement>;
 
-  // TODO: replace placeholder images with real hobby photos
-  // Local SVG placeholders (public/about/) - previously used picsum.photos, which had
-  // an outage (503s/timeouts), breaking the carousel. Local files have no external
-  // dependency and can't go down.
+  // TODO: replace placeholder URLs with real hobby photos
+  // Using loremflickr.com (picsum.photos had an outage - 503s/timeouts - that broke
+  // the carousel). `?lock=N` pins a specific photo per slot so it doesn't change on
+  // every reload.
   images: CarouselImage[] = [
-    { src: 'about/hobby1.svg', alt: 'Hobby photo 1' },
-    { src: 'about/hobby2.svg', alt: 'Hobby photo 2' },
-    { src: 'about/hobby3.svg', alt: 'Hobby photo 3' },
-    { src: 'about/hobby4.svg', alt: 'Hobby photo 4' },
-    { src: 'about/hobby5.svg', alt: 'Hobby photo 5' },
+    { src: 'https://loremflickr.com/800/500/nature?lock=1', alt: 'Hobby photo 1' },
+    { src: 'https://loremflickr.com/800/500/city?lock=2', alt: 'Hobby photo 2' },
+    { src: 'https://loremflickr.com/800/500/music?lock=3', alt: 'Hobby photo 3' },
+    { src: 'https://loremflickr.com/800/500/sports?lock=4', alt: 'Hobby photo 4' },
+    { src: 'https://loremflickr.com/800/500/travel?lock=5', alt: 'Hobby photo 5' },
   ];
 
   current    = signal(0);
