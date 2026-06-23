@@ -5,7 +5,23 @@
   @for (section of sections; track section.title) {
     <section class="command-center-section">
       <h2>{{ section.title }}</h2>
-      @if (section.links.length) {
+      @if (section.title === 'Completed') {
+        @if (certificates.length) {
+          <ul class="link-list certificate-list">
+            @for (cert of certificates; track cert.pdfHref) {
+              <li class="link-card certificate-card">
+                <a [href]="cert.pdfHref" class="link-text" target="_blank" rel="noopener">
+                  <span class="certificate-icon">📄</span>
+                  {{ cert.title }}
+                  <span class="link-icon">↗</span>
+                </a>
+              </li>
+            }
+          </ul>
+        } @else {
+          <p class="empty-state">Nothing here yet.</p>
+        }
+      } @else if (section.links.length) {
         <ul class="link-list" cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="drop(section, $event)">
           @for (link of section.links; track link.href) {
             <li
