@@ -20,9 +20,16 @@ interface Certificate {
 
 // TODO: add a "Resume ATS Grader" section/upload endpoint to Command Center.
 // User uploads a resume (PDF/DOC/DOCX), it's sent to an open-source ATS-scoring
-// engine, and the grading/feedback is displayed here. User recalls a major
-// company recently open-sourcing their ATS grader - research which project
-// that is (and license/self-host requirements) before picking an implementation.
+// engine, and the grading/feedback is displayed here.
+//
+// Searched (2026-06-25) for the "major company open-sourcing their ATS grader"
+// the user recalled - found no such release from LinkedIn/Indeed/Workday/
+// Greenhouse/etc. Still TBD; revisit if more detail surfaces (company name,
+// rough date, where it was seen). Community options that do exist if no
+// big-company release is found: srbhr/Resume-Matcher (github.com/srbhr/
+// Resume-Matcher, actively maintained, Spacy/NLTK/vector-similarity scoring)
+// and sunnypatell/ats-screener (simulates 6 real enterprise ATS platforms,
+// client-side parsing) - not yet decided on either.
 // Needs: a backend/serverless endpoint to receive the upload and call the
 // grader (can't run resume-parsing/scoring client-side), plus a results view
 // (score + feedback) in this component.
