@@ -18,6 +18,14 @@ interface Certificate {
   pdfHref: string;
 }
 
+// TODO: add a "Resume ATS Grader" section/upload endpoint to Command Center.
+// User uploads a resume (PDF/DOC/DOCX), it's sent to an open-source ATS-scoring
+// engine, and the grading/feedback is displayed here. User recalls a major
+// company recently open-sourcing their ATS grader - research which project
+// that is (and license/self-host requirements) before picking an implementation.
+// Needs: a backend/serverless endpoint to receive the upload and call the
+// grader (can't run resume-parsing/scoring client-side), plus a results view
+// (score + feedback) in this component.
 @Component({
   selector: 'app-command-center',
   standalone: true,
