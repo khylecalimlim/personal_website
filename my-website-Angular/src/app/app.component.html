@@ -118,7 +118,13 @@
   <span>&#8964;</span>
 </div>
 
-<main [style.background-color]="theme.backgroundColor()" [style.color]="theme.textColor()" [style.font-family]="theme.fontFamily()">
+<main
+  [style.background-color]="theme.backgroundColor()"
+  [style.color]="theme.textColor()"
+  [style.font-family]="theme.fontFamily()"
+  [style.--header-text-color]="theme.applyTextColorToHeader() ? theme.textColor() : null"
+  [style.--header-font-family]="theme.applyFontToHeader() ? theme.fontFamily() : null"
+>
   <router-outlet />
 </main>
 

@@ -14,12 +14,16 @@ h1 {
   font-size: 1.75rem;
   font-weight: 600;
   margin-bottom: 0.4rem;
+  color: var(--header-text-color, #e0e0e0);
+  font-family: var(--header-font-family, system-ui, -apple-system, sans-serif);
 }
 
 h2 {
   font-size: 1.25rem;
   font-weight: 600;
   margin-bottom: 1rem;
+  color: var(--header-text-color, #e0e0e0);
+  font-family: var(--header-font-family, system-ui, -apple-system, sans-serif);
 }
 
 .subtitle {
