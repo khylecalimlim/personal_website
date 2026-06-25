@@ -42,6 +42,14 @@ export const SPARK_PRESETS: Record<string, SparkPreset> = {
 
 @Injectable({ providedIn: 'root' })
 export class ThemeService {
+  // TODO: textColor is only applied via inherited `color` on <main> (see
+  // app.component.html), so any element with its own hardcoded color
+  // (e.g. .subtitle, .description, muted/secondary text, links) doesn't
+  // pick it up. The "Text Color" setting should apply to ALL text on the
+  // site, not just elements that happen to inherit. Likely needs each
+  // component's hardcoded text colors replaced with a var bound to
+  // textColor (similar to the --header-text-color pattern used for
+  // headings), or a broader CSS variable applied at a higher level.
   backgroundColor = signal(DEFAULT_BG);
   textColor = signal(DEFAULT_TEXT);
   fontFamily = signal(DEFAULT_FONT);
