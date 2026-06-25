@@ -42,9 +42,6 @@ export const SPARK_PRESETS: Record<string, SparkPreset> = {
 
 @Injectable({ providedIn: 'root' })
 export class ThemeService {
-  // TODO: applyFontToHeader / applyTextColorToHeader currently only affect the
-  // navbar — extend so the chosen font/text color apply to all headers and
-  // components across the site, not just the navbar.
   backgroundColor = signal(DEFAULT_BG);
   textColor = signal(DEFAULT_TEXT);
   fontFamily = signal(DEFAULT_FONT);
