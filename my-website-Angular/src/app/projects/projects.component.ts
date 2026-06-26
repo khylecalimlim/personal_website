@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
 
 interface Project {
@@ -11,6 +11,8 @@ interface Project {
   tags: string[];
 }
 
+const ORDER_STORAGE_KEY = 'projects-order';
+
 @Component({
   selector: 'app-projects',
   standalone: true,
@@ -18,7 +20,7 @@ interface Project {
   templateUrl: './projects.component.html',
   styleUrl: './projects.component.scss'
 })
-export class ProjectsComponent {
+export class ProjectsComponent implements OnInit {
   // TODO: replace href values with real GitHub repo URLs once created
   projects: Project[] = [
     {
@@ -56,7 +58,16 @@ export class ProjectsComponent {
     }
   ];
 
+  ngOnInit(): void {
+    const savedOrder = localStorage.getItem(ORDER_STORAGE_KEY);
+    if (!savedOrder) return;
+
+    const titleOrder: string[] = JSON.parse(savedOrder);
+    this.projects.sort((a, b) => titleOrder.indexOf(a.title) - titleOrder.indexOf(b.title));
+  }
+
   drop(event: CdkDragDrop<Project[]>) {
     moveItemInArray(this.projects, event.previousIndex, event.currentIndex);
+    localStorage.setItem(ORDER_STORAGE_KEY, JSON.stringify(this.projects.map(p => p.title)));
   }
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
 
 interface CommandCenterLink {
@@ -17,6 +17,8 @@ interface Certificate {
   title: string;
   pdfHref: string;
 }
+
+const ORDER_STORAGE_PREFIX = 'command-center-order-';
 
 // TODO: add a "Resume ATS Grader" section/upload endpoint to Command Center.
 // User uploads a resume (PDF/DOC/DOCX), it's sent to an open-source ATS-scoring
@@ -40,7 +42,7 @@ interface Certificate {
   templateUrl: './command-center.component.html',
   styleUrl: './command-center.component.scss'
 })
-export class CommandCenterComponent {
+export class CommandCenterComponent implements OnInit {
   sections: CommandCenterSection[] = [
     {
       title: 'Learning Progress',
@@ -72,6 +74,16 @@ export class CommandCenterComponent {
     { title: 'Claude Code 101', pdfHref: '/command-center/certificates/ClaudeCode101-certificate.pdf' }
   ];
 
+  ngOnInit(): void {
+    for (const section of this.sections) {
+      const savedOrder = localStorage.getItem(ORDER_STORAGE_PREFIX + section.title);
+      if (!savedOrder) continue;
+
+      const labelOrder: string[] = JSON.parse(savedOrder);
+      section.links.sort((a, b) => labelOrder.indexOf(a.label) - labelOrder.indexOf(b.label));
+    }
+  }
+
   pop(link: CommandCenterLink): void {
     link.inverted = !link.inverted;
     link.jiggling = true;
@@ -79,5 +91,9 @@ export class CommandCenterComponent {
 
   drop(section: CommandCenterSection, event: CdkDragDrop<CommandCenterLink[]>): void {
     moveItemInArray(section.links, event.previousIndex, event.currentIndex);
+    localStorage.setItem(
+      ORDER_STORAGE_PREFIX + section.title,
+      JSON.stringify(section.links.map(l => l.label))
+    );
   }
 }
