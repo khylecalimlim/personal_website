@@ -11,9 +11,9 @@
             @for (cert of certificates; track cert.pdfHref) {
               <li class="link-card certificate-card">
                 <a [href]="cert.pdfHref" class="link-text" target="_blank" rel="noopener">
-                  <span class="certificate-icon">📄</span>
+                  <span class="certificate-icon" aria-hidden="true">📄</span>
                   {{ cert.title }}
-                  <span class="link-icon">↗</span>
+                  <span class="link-icon" aria-hidden="true">↗</span>
                 </a>
               </li>
             }
@@ -34,7 +34,7 @@
             >
               <a [href]="link.href" class="link-text" target="_blank" rel="noopener">
                 {{ link.label }}
-                <span class="link-icon">↗</span>
+                <span class="link-icon" aria-hidden="true">↗</span>
               </a>
             </li>
           }
