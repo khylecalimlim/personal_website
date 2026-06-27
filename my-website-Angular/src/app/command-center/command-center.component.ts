@@ -27,11 +27,23 @@ const ORDER_STORAGE_PREFIX = 'command-center-order-';
 // Searched (2026-06-25) for the "major company open-sourcing their ATS grader"
 // the user recalled - found no such release from LinkedIn/Indeed/Workday/
 // Greenhouse/etc. Still TBD; revisit if more detail surfaces (company name,
-// rough date, where it was seen). Community options that do exist if no
-// big-company release is found: srbhr/Resume-Matcher (github.com/srbhr/
-// Resume-Matcher, actively maintained, Spacy/NLTK/vector-similarity scoring)
-// and sunnypatell/ats-screener (simulates 6 real enterprise ATS platforms,
-// client-side parsing) - not yet decided on either.
+// rough date, where it was seen).
+//
+// Compared the two community candidates (2026-06-25, via GitHub API):
+//   - srbhr/Resume-Matcher: 27.5k stars, Apache-2.0, pushed yesterday - by far
+//     the most established/best-reviewed option. Supports a fully local LLM
+//     via Ollama (resume data never leaves the machine if configured that
+//     way), but is a real FastAPI + Next.js app meant to be self-hosted via
+//     Docker - not a drop-in API. Stores parsed data in a local JSON file
+//     (TinyDB) on disk.
+//   - sunnypatell/ats-screener: only 70 stars, MIT, much smaller/newer
+//     project - parses client-side in-browser, but sends extracted text to
+//     an AI scoring call.
+// Decision: Resume-Matcher is the better pick on legitimacy, but since this
+// site deploys statically to GitHub Pages (no backend to reach), wiring it
+// into the public Command Center needs a hosting decision first (run it
+// locally for personal use only, vs. stand up a publicly-reachable backend).
+// Paused for now - revisit hosting approach before implementing.
 // Needs: a backend/serverless endpoint to receive the upload and call the
 // grader (can't run resume-parsing/scoring client-side), plus a results view
 // (score + feedback) in this component.
