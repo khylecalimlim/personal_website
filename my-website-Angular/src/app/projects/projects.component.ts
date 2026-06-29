@@ -6,6 +6,11 @@ import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-
 // its tag a distinct color in projects.component.scss (.status.not-started) —
 // gray to stand out from the blue "wip" / green "complete" tags while still
 // matching the theme.
+
+// TODO (easy): add an "on-hold" status to Project['status'] for projects that
+// were started but are paused. Give its tag a red color in
+// projects.component.scss (.status.on-hold) — distinct from the blue "wip",
+// green "complete", and gray "not-started" tags while still matching the theme.
 interface Project {
   title: string;
   href: string;
@@ -46,20 +51,20 @@ export class ProjectsComponent implements OnInit {
       tags: ['Python', 'Jupyter', 'Machine Learning', 'Pandas', 'scikit-learn']
     },
     {
+      title: 'URL Shortener + Uptime Monitor',
+      href: '#',
+      status: 'wip',
+      statusLabel: 'In Progress',
+      description: 'A self-hosted link shortener where every registered URL is also tracked for uptime — a worker pings each link on a schedule and records status/response time, while clicks and health checks both persist as real history in Postgres (Redis only caches the hot redirect lookup and latest status, never the source of truth). Full container lifecycle build: Dockerised services orchestrated with Compose, then migrated to Kubernetes manifests with Ingress and TLS. The goal is real infra knowledge, not just the app.',
+      tags: ['Docker', 'Kubernetes', 'k3s', 'Helm', 'Redis', 'PostgreSQL', 'GitHub Actions']
+    },
+    {
       title: 'Music League Analytics',
       href: '#',
       status: 'wip',
       statusLabel: 'In Progress',
       description: 'Data pipeline and dashboard for analysing Music League rounds — tracking scoring trends, voter behaviour, taste clusters, and head-to-head records across players. Includes ML clustering of players by taste profile.',
       tags: ['Python', 'Pandas', 'Plotly Dash', 'PostgreSQL', 'scikit-learn']
-    },
-    {
-      title: 'Containerised Web App',
-      href: '#',
-      status: 'wip',
-      statusLabel: 'In Progress',
-      description: 'A full container lifecycle project — Dockerising a web app, orchestrating it with Compose, then migrating to Kubernetes manifests with Ingress and TLS. The goal is real infra knowledge, not just the app.',
-      tags: ['Docker', 'Kubernetes', 'k3s', 'Helm', 'GitHub Actions']
     },
     {
       title: 'API Protocols Exploration',
