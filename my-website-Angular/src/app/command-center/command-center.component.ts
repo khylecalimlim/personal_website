@@ -73,6 +73,8 @@ export class CommandCenterComponent implements OnInit {
       links: []
     },
     {
+      // TODO (easy): add a Dice link to this section.
+      // TODO (easy): rename this section title to "Job Boards".
       title: 'Job Applications',
       links: [
         { label: 'LinkedIn', href: 'https://www.linkedin.com/in/khyle-calimlim-3b57b91b5/' },

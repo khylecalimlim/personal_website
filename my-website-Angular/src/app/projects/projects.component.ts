@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
 
+// TODO (easy): add a "not-started" status to Project['status'] for ideas that
+// don't have work underway yet (e.g. the API Protocols Exploration card). Give
+// its tag a distinct color in projects.component.scss (.status.not-started) —
+// gray to stand out from the blue "wip" / green "complete" tags while still
+// matching the theme.
 interface Project {
   title: string;
   href: string;
@@ -55,6 +60,14 @@ export class ProjectsComponent implements OnInit {
       statusLabel: 'In Progress',
       description: 'A full container lifecycle project — Dockerising a web app, orchestrating it with Compose, then migrating to Kubernetes manifests with Ingress and TLS. The goal is real infra knowledge, not just the app.',
       tags: ['Docker', 'Kubernetes', 'k3s', 'Helm', 'GitHub Actions']
+    },
+    {
+      title: 'API Protocols Exploration',
+      href: '#',
+      status: 'wip',
+      statusLabel: 'In Progress',
+      description: 'Hands-on projects to learn API styles beyond REST — a GraphQL API aggregating a few data sources behind one schema, and a gRPC client/server CLI tool exploring streaming RPCs. The goal is real protocol knowledge, not just another CRUD app.',
+      tags: ['GraphQL', 'gRPC']
     }
   ];
 
