@@ -175,6 +175,12 @@ h1 {
     color: #a0a0a0;
     border: 1px solid rgba(160, 160, 160, 0.25);
   }
+
+  &.on-hold {
+    background-color: rgba(224, 91, 91, 0.12);
+    color: #e05b5b;
+    border: 1px solid rgba(224, 91, 91, 0.25);
+  }
 }
 
 .description {

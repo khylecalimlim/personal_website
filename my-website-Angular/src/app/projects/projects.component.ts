@@ -1,15 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
 
-// TODO (easy): add an "on-hold" status to Project['status'] for projects that
-// were started but are paused. Give its tag a red color in
-// projects.component.scss (.status.on-hold) — distinct from the blue "wip",
-// green "complete", and gray "not-started" tags while still matching the theme.
 interface Project {
   title: string;
   href: string;
   playHref?: string;
-  status: 'wip' | 'complete' | 'not-started';
+  status: 'wip' | 'complete' | 'not-started' | 'on-hold';
   statusLabel: string;
   description: string;
   tags: string[];
