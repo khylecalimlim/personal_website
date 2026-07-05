@@ -50,7 +50,7 @@ export class ProjectsComponent implements OnInit {
     },
     {
       title: 'Music League Analytics',
-      href: '#',
+      href: 'https://github.com/khylecalimlim/MusicLeague',
       status: 'on-hold',
       statusLabel: 'On Hold',
       description: 'Data pipeline and dashboard for analysing Music League rounds — tracking scoring trends, voter behaviour, taste clusters, and head-to-head records across players. Includes ML clustering of players by taste profile.',
