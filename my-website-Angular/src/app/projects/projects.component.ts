@@ -63,6 +63,14 @@ export class ProjectsComponent implements OnInit {
       statusLabel: 'Not Started',
       description: 'Hands-on projects to learn API styles beyond REST — a GraphQL API aggregating a few data sources behind one schema, and a gRPC client/server CLI tool exploring streaming RPCs. The goal is real protocol knowledge, not just another CRUD app.',
       tags: ['GraphQL', 'gRPC']
+    },
+    {
+      title: 'Load Balancing / Load Testing Playground',
+      href: '#',
+      status: 'not-started',
+      statusLabel: 'Not Started',
+      description: 'A hands-on look at horizontal scaling — running multiple instances of a small app behind a load balancer (round-robin, least-connections, and sticky-session strategies compared), then hammering it with scripted load tests to watch how throughput, latency, and error rate change as instances are added or killed. Goal is real intuition for scaling and failure behaviour, not just reading about it.',
+      tags: ['Docker', 'Nginx', 'k6', 'Load Balancing', 'Kubernetes']
     }
   ];
 
