@@ -23,6 +23,11 @@ interface Particle {
   radius: number;
 }
 
+// TODO(easy): rotating fun-fact line on the hero. A small hardcoded string[]
+// (e.g. "currently learning: X", "currently playing: Y") cycled via
+// setInterval into a signal, rendered as one line near .tagline/.bio in
+// home.component.html with a quick CSS fade between changes. Remember to
+// clearInterval in ngOnDestroy alongside the existing cleanup.
 @Component({
   selector: 'app-home',
   standalone: true,

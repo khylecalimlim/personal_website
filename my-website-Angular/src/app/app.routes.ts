@@ -30,6 +30,11 @@ import { CommandCenterComponent } from './command-center/command-center.componen
 // Recommendation: start with option 1 for a quick MVP, revisit option 2 if real auth
 // becomes worth the migration. Once gated, also remove/hide the nav link in
 // app.component.html and rename the route to an unlinked path.
+// TODO(easy): fun animated 404 page. Unknown URLs currently just silently
+// redirect to home ('**' below), so a typo'd link looks like nothing happened.
+// Add a small NotFoundComponent (themed, playful — e.g. a wandering chess pawn
+// sprite, a nod to the Chess project) and point '**' at it instead of
+// redirecting. Since it's a genuine dead-end page, keep a link back to home on it.
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'about', component: AboutComponent },

@@ -36,6 +36,11 @@ const SPARK_LIFETIME = 650; // ms — must match the CSS animation duration
 // a physics object. Since it's global (not page-specific), this probably
 // belongs in AppComponent like the click sparks, gated by its own settings
 // toggle.
+// TODO(easy): tab title easter egg. On document visibilitychange, when the tab
+// becomes hidden, swap document.title to something playful (e.g. "👋 come back!")
+// and restore the original title when the tab becomes visible again. Global
+// behavior, so it belongs here — a couple lines in an HostListener or a small
+// ngOnInit subscription to the visibilitychange event, no new component needed.
 export class AppComponent {
   theme = inject(ThemeService);
   settingsOpen = false;
@@ -44,6 +49,13 @@ export class AppComponent {
   // Click-anywhere star/spark burst — purely decorative, in the same
   // playful spirit as the home page particle background and easter eggs.
   // Can be toggled off via the "Enable click sparks" setting.
+  //
+  // TODO(easy): custom cursor trail. Reuse this same Spark interface/preset
+  // system (SPARK_PRESETS) but drive it off a `document:pointermove` listener
+  // instead of `document:click`, spawning a lighter/lower-opacity glyph every
+  // few pixels of movement (throttle so it doesn't spawn on every single
+  // pointermove event) instead of a burst. Should get its own "Enable cursor
+  // trail" toggle in ThemeService alongside `clickSparksEnabled`.
   sparks = signal<Spark[]>([]);
   private nextSparkId = 0;
 

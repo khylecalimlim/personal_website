@@ -55,6 +55,11 @@ export class FeedbackComponent {
       this.name.set('');
       this.comment.set('');
       this.submitted.set(true);
+      // TODO(easy): confetti burst on successful submit, right here. Reuse the
+      // canvas + particle-burst pattern already used for the home page
+      // background and the app-wide click sparks (see home.component.ts /
+      // app.component.ts) — a short-lived burst of colored rects/glyphs
+      // falling with gravity instead of the sparks' radial burst.
       setTimeout(() => this.submitted.set(false), 4000);
     } catch {
       this.errorMessage.set('Something went wrong. Please try again.');

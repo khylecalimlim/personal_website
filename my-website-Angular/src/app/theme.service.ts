@@ -50,6 +50,12 @@ export class ThemeService {
   // component's hardcoded text colors replaced with a var bound to
   // textColor (similar to the --header-text-color pattern used for
   // headings), or a broader CSS variable applied at a higher level.
+  // TODO(easy): one-click theme presets. Add a small named-preset list here
+  // (similar in shape to SPARK_PRESETS above — e.g. Ocean, Sunset, Forest, each
+  // bundling a backgroundColor/textColor/fontFamily trio) and a method like
+  // `applyPreset(key: string)` that sets all three signals at once. Render as
+  // preset buttons in the customization panel (app.component.html) above the
+  // existing manual color/font pickers, which stay as-is for full control.
   backgroundColor = signal(DEFAULT_BG);
   textColor = signal(DEFAULT_TEXT);
   fontFamily = signal(DEFAULT_FONT);
