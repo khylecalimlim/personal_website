@@ -16,6 +16,7 @@ interface Spark {
 
 const SPARK_COUNT    = 6;
 const SPARK_LIFETIME = 650; // ms — must match the CSS animation duration
+const AWAY_TITLE     = '👋 come back!';
 
 @Component({
   selector: 'app-root',
@@ -36,15 +37,17 @@ const SPARK_LIFETIME = 650; // ms — must match the CSS animation duration
 // a physics object. Since it's global (not page-specific), this probably
 // belongs in AppComponent like the click sparks, gated by its own settings
 // toggle.
-// TODO(easy): tab title easter egg. On document visibilitychange, when the tab
-// becomes hidden, swap document.title to something playful (e.g. "👋 come back!")
-// and restore the original title when the tab becomes visible again. Global
-// behavior, so it belongs here — a couple lines in an HostListener or a small
-// ngOnInit subscription to the visibilitychange event, no new component needed.
 export class AppComponent {
   theme = inject(ThemeService);
   settingsOpen = false;
   navCollapsed = false;
+
+  private readonly originalTitle = document.title;
+
+  @HostListener('document:visibilitychange')
+  onVisibilityChange() {
+    document.title = document.hidden ? AWAY_TITLE : this.originalTitle;
+  }
 
   // Click-anywhere star/spark burst — purely decorative, in the same
   // playful spirit as the home page particle background and easter eggs.
