@@ -40,3 +40,9 @@ main {
     padding: 1rem;
   }
 }
+
+@media print {
+  .navbar, .expand-tab {
+    display: none;
+  }
+}

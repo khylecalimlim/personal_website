@@ -75,7 +75,19 @@
   }
 }
 
-// TODO(easy): print-friendly stylesheet. Add an @media print block that hides
-// the navbar/theme chrome (.navbar, .download-btn, .pdf-fallback) and lets
-// .pdf-viewer expand to fill the printable page, so printing/"Save as PDF"
-// from the browser doesn't carry over on-screen-only UI.
+@media print {
+  .resume-page {
+    height: auto;
+    padding: 0;
+  }
+
+  .resume-header .download-btn,
+  .pdf-fallback {
+    display: none;
+  }
+
+  .pdf-viewer {
+    border: none;
+    height: 100vh;
+  }
+}
