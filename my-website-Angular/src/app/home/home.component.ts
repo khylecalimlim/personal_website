@@ -23,11 +23,17 @@ interface Particle {
   radius: number;
 }
 
-// TODO(easy): rotating fun-fact line on the hero. A small hardcoded string[]
-// (e.g. "currently learning: X", "currently playing: Y") cycled via
-// setInterval into a signal, rendered as one line near .tagline/.bio in
-// home.component.html with a quick CSS fade between changes. Remember to
-// clearInterval in ngOnDestroy alongside the existing cleanup.
+const FUN_FACTS = [
+  'currently building: a chess engine from scratch',
+  'currently learning: WebSockets, GraphQL, gRPC',
+  'current build status: passing (mostly)',
+  'probably debugging something right now',
+  'favorite HTTP status: 200 OK',
+];
+
+const FUN_FACT_INTERVAL      = 4000; // ms between facts
+const FUN_FACT_FADE_DURATION = 300;  // ms — must match .fun-fact's CSS transition
+
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -48,6 +54,10 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   private rafId = 0;
   private resizeObserver!: ResizeObserver;
 
+  funFact = signal(FUN_FACTS[0]);
+  funFactFading = signal(false);
+  private funFactInterval!: ReturnType<typeof setInterval>;
+
   // ── Lifecycle ──────────────────────────────────────────────────────────────
 
   ngAfterViewInit() {
@@ -59,11 +69,22 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
 
     this.resizeObserver = new ResizeObserver(() => this.resize());
     this.resizeObserver.observe(canvas.parentElement!);
+
+    let factIndex = 0;
+    this.funFactInterval = setInterval(() => {
+      this.funFactFading.set(true);
+      setTimeout(() => {
+        factIndex = (factIndex + 1) % FUN_FACTS.length;
+        this.funFact.set(FUN_FACTS[factIndex]);
+        this.funFactFading.set(false);
+      }, FUN_FACT_FADE_DURATION);
+    }, FUN_FACT_INTERVAL);
   }
 
   ngOnDestroy() {
     cancelAnimationFrame(this.rafId);
     this.resizeObserver?.disconnect();
+    clearInterval(this.funFactInterval);
   }
 
   // ── Canvas setup ───────────────────────────────────────────────────────────

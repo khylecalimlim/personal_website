@@ -9,6 +9,7 @@
       keep my resume handy, and occasionally hear what people think of my work.
       Still under construction — but then again, aren't we all.
     </p>
+    <p class="fun-fact" [class.fading]="funFactFading()">{{ funFact() }}</p>
     <div class="cta-row">
       <a routerLink="/projects" class="btn btn-primary">View Projects</a>
       <a href="resume.pdf" download="Khyle_Calimlim_Resume.pdf" class="btn btn-secondary">Download Resume</a>
