@@ -147,3 +147,29 @@ h2 {
   line-height: 1.5;
   white-space: pre-wrap;
 }
+
+// ── Confetti burst on successful submit ──────────────────────────────────────
+
+.confetti-piece {
+  position: fixed;
+  top: -20px;
+  pointer-events: none;
+  user-select: none;
+  z-index: 2000;
+  border-radius: 1px;
+  will-change: transform, opacity;
+  animation-name: confetti-fall;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+}
+
+@keyframes confetti-fall {
+  from {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 1;
+  }
+  to {
+    transform: translate(var(--dx), 105vh) rotate(var(--rot));
+    opacity: 0;
+  }
+}

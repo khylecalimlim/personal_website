@@ -8,6 +8,21 @@ export interface FeedbackEntry {
   createdAt: Date;
 }
 
+interface ConfettiPiece {
+  id: number;
+  left: number;   // vw, starting horizontal position
+  dx: number;     // px, horizontal drift as it falls
+  rotation: number;
+  size: number;
+  color: string;
+  duration: number; // ms
+  delay: number;    // ms
+}
+
+const CONFETTI_COUNT = 40;
+const CONFETTI_COLORS = ['#5b8dee', '#f5d76e', '#ff6b9d', '#5be05c', '#9b8cf2', '#ff9d4d'];
+const CONFETTI_LIFETIME = 2600; // ms — covers the longest duration + delay below
+
 @Component({
   selector: 'app-feedback',
   standalone: true,
@@ -25,6 +40,29 @@ export class FeedbackComponent {
   // TODO(supabase): replace with entries loaded from the `feedback` table on init
   // e.g. const { data } = await supabase.from('feedback').select('*').order('created_at', { ascending: false });
   entries = signal<FeedbackEntry[]>([]);
+
+  confetti = signal<ConfettiPiece[]>([]);
+  private nextConfettiId = 0;
+
+  private burstConfetti() {
+    const burst: ConfettiPiece[] = Array.from({ length: CONFETTI_COUNT }, () => ({
+      id: this.nextConfettiId++,
+      left: Math.random() * 100,
+      dx: (Math.random() - 0.5) * 120,
+      rotation: Math.random() * 720 - 360,
+      size: 6 + Math.random() * 8,
+      color: CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)],
+      duration: 1400 + Math.random() * 900,
+      delay: Math.random() * 250,
+    }));
+
+    this.confetti.update(c => [...c, ...burst]);
+
+    const ids = new Set(burst.map(p => p.id));
+    setTimeout(() => {
+      this.confetti.update(c => c.filter(p => !ids.has(p.id)));
+    }, CONFETTI_LIFETIME);
+  }
 
   async submit() {
     const name = this.name().trim();
@@ -55,11 +93,7 @@ export class FeedbackComponent {
       this.name.set('');
       this.comment.set('');
       this.submitted.set(true);
-      // TODO(easy): confetti burst on successful submit, right here. Reuse the
-      // canvas + particle-burst pattern already used for the home page
-      // background and the app-wide click sparks (see home.component.ts /
-      // app.component.ts) — a short-lived burst of colored rects/glyphs
-      // falling with gravity instead of the sparks' radial burst.
+      this.burstConfetti();
       setTimeout(() => this.submitted.set(false), 4000);
     } catch {
       this.errorMessage.set('Something went wrong. Please try again.');

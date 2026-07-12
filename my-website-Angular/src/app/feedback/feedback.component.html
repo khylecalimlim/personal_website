@@ -66,3 +66,16 @@
 
   </div>
 </div>
+
+@for (piece of confetti(); track piece.id) {
+  <span class="confetti-piece"
+    [style.left.vw]="piece.left"
+    [style.width.px]="piece.size"
+    [style.height.px]="piece.size * 0.4"
+    [style.background-color]="piece.color"
+    [style.animation-duration.ms]="piece.duration"
+    [style.animation-delay.ms]="piece.delay"
+    [style.--dx.px]="piece.dx"
+    [style.--rot.deg]="piece.rotation"
+  ></span>
+}
