@@ -71,6 +71,14 @@ export class ProjectsComponent implements OnInit {
       statusLabel: 'Not Started',
       description: 'A hands-on look at horizontal scaling — running multiple instances of a small app behind a load balancer (round-robin, least-connections, and sticky-session strategies compared), then hammering it with scripted load tests to watch how throughput, latency, and error rate change as instances are added or killed. Goal is real intuition for scaling and failure behaviour, not just reading about it.',
       tags: ['Docker', 'Nginx', 'k6', 'Load Balancing', 'Kubernetes']
+    },
+    {
+      title: 'Secure CI/CD Pipeline',
+      href: '#',
+      status: 'not-started',
+      statusLabel: 'Not Started',
+      description: 'A CI/CD pipeline that ships an app to a Kubernetes cluster with security baked in, not bolted on: Terraform provisions the infrastructure as code, GitHub Actions fires automatically on every push/PR to build and deploy, and HashiCorp Vault manages secrets instead of plaintext env vars. Prometheus and Grafana observe everything that happens across the app, cluster, and pipeline itself. Once that core pipeline works, SAST/DAST scanning and OPA policy-as-code gates get layered on so the pipeline can catch and block a bad deploy, not just ship it faster. Goal is real DevSecOps intuition, built up in stages rather than all at once.',
+      tags: ['Terraform', 'GitHub Actions', 'Kubernetes', 'Prometheus/Grafana', 'HashiCorp Vault', 'OPA', 'SAST/DAST']
     }
   ];
 

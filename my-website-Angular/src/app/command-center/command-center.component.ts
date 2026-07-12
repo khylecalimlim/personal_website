@@ -79,6 +79,7 @@ export class CommandCenterComponent implements OnInit {
         { label: 'BuiltIn', href: 'https://builtin.com/?application-tracker#application-tracker' },
         { label: 'Indeed', href: 'https://www.indeed.com/?from=gnav-viewjob' },
         { label: 'Dice', href: 'https://www.dice.com/' }
+        // TODO(easy): add a "Sprout" entry here once the profile URL is known.
       ]
     }
   ];
