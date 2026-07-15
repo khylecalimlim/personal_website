@@ -63,6 +63,7 @@ export class ThemeService {
   applyTextColorToHeader = signal(false);
   clickSparksEnabled = signal(true);
   sparkPreset = signal(DEFAULT_SPARK_PRESET);
+  cursorTrailEnabled = signal(false);
 
   readonly sparkPresetOptions = Object.entries(SPARK_PRESETS).map(([key, preset]) => ({
     key,
@@ -109,5 +110,6 @@ export class ThemeService {
     this.applyTextColorToHeader.set(false);
     this.clickSparksEnabled.set(true);
     this.sparkPreset.set(DEFAULT_SPARK_PRESET);
+    this.cursorTrailEnabled.set(false);
   }
 }

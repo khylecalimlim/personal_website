@@ -96,6 +96,20 @@
       </div>
 
       <div class="setting-row">
+        <label>Enable cursor trail</label>
+        <label class="toggle">
+          <input
+            type="checkbox"
+            [checked]="theme.cursorTrailEnabled()"
+            (change)="theme.cursorTrailEnabled.set($any($event.target).checked)"
+          />
+          <span class="toggle-track">
+            <span class="toggle-thumb"></span>
+          </span>
+        </label>
+      </div>
+
+      <div class="setting-row">
         <label>Click spark style</label>
         <select
           class="font-select"
@@ -137,4 +151,14 @@
     [style.--dy.px]="spark.dy"
     [style.--rot.deg]="spark.rotation"
   >{{ spark.glyph }}</span>
+}
+
+@for (dot of trail(); track dot.id) {
+  <span class="trail-dot"
+    [style.left.px]="dot.x"
+    [style.top.px]="dot.y"
+    [style.font-size.px]="dot.size"
+    [style.color]="dot.color"
+    [style.--rot.deg]="dot.rotation"
+  >{{ dot.glyph }}</span>
 }

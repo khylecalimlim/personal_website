@@ -358,3 +358,32 @@
     opacity: 0;
   }
 }
+
+// ── Cursor trail ──────────────────────────────────────────────────────────
+// Same glyph/preset system as the click spark burst above, but fades/shrinks
+// in place instead of flying outward, so it reads as a lightweight trail
+// rather than another burst.
+
+.trail-dot {
+  position: fixed;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+  user-select: none;
+  z-index: 1999;
+  line-height: 1;
+  opacity: 0.55;
+  will-change: transform, opacity;
+  animation: trail-fade 0.5s ease-out forwards;
+}
+
+@keyframes trail-fade {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg) scale(1);
+    opacity: 0.55;
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(var(--rot)) scale(0.4);
+    opacity: 0;
+  }
+}

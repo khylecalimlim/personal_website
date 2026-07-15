@@ -18,6 +18,9 @@ const SPARK_COUNT    = 6;
 const SPARK_LIFETIME = 650; // ms — must match the CSS animation duration
 const AWAY_TITLE     = '👋 come back!';
 
+const TRAIL_LIFETIME     = 500; // ms — must match the CSS trail animation duration
+const TRAIL_MIN_DISTANCE = 18;  // px between pointer moves before spawning another trail dot
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -52,13 +55,6 @@ export class AppComponent {
   // Click-anywhere star/spark burst — purely decorative, in the same
   // playful spirit as the home page particle background and easter eggs.
   // Can be toggled off via the "Enable click sparks" setting.
-  //
-  // TODO(easy): custom cursor trail. Reuse this same Spark interface/preset
-  // system (SPARK_PRESETS) but drive it off a `document:pointermove` listener
-  // instead of `document:click`, spawning a lighter/lower-opacity glyph every
-  // few pixels of movement (throttle so it doesn't spawn on every single
-  // pointermove event) instead of a burst. Should get its own "Enable cursor
-  // trail" toggle in ThemeService alongside `clickSparksEnabled`.
   sparks = signal<Spark[]>([]);
   private nextSparkId = 0;
 
@@ -91,5 +87,46 @@ export class AppComponent {
     setTimeout(() => {
       this.sparks.update(s => s.filter(spark => !ids.has(spark.id)));
     }, SPARK_LIFETIME);
+  }
+
+  // Cursor trail — reuses the same Spark shape/preset system as the click
+  // burst above, but drops a single lighter/lower-opacity glyph as the
+  // pointer moves instead of a radial burst on click. Throttled by distance
+  // (TRAIL_MIN_DISTANCE) rather than time so a fast swipe still gets a
+  // continuous trail while a slow drift doesn't spam glyphs.
+  trail = signal<Spark[]>([]);
+  private nextTrailId = 0;
+  private lastTrailX = 0;
+  private lastTrailY = 0;
+
+  @HostListener('document:pointermove', ['$event'])
+  onDocumentPointerMove(e: PointerEvent) {
+    if (!this.theme.cursorTrailEnabled()) return;
+
+    const dx = e.clientX - this.lastTrailX;
+    const dy = e.clientY - this.lastTrailY;
+    if (Math.hypot(dx, dy) < TRAIL_MIN_DISTANCE) return;
+    this.lastTrailX = e.clientX;
+    this.lastTrailY = e.clientY;
+
+    const preset = SPARK_PRESETS[this.theme.sparkPreset()];
+    const dot: Spark = {
+      id: this.nextTrailId++,
+      x: e.clientX,
+      y: e.clientY,
+      dx: 0,
+      dy: 0,
+      rotation: (Math.random() - 0.5) * 180,
+      size: 8 + Math.random() * 6,
+      glyph: preset.glyphs[Math.floor(Math.random() * preset.glyphs.length)],
+      color: preset.colors[Math.floor(Math.random() * preset.colors.length)],
+    };
+
+    this.trail.update(t => [...t, dot]);
+
+    const id = dot.id;
+    setTimeout(() => {
+      this.trail.update(t => t.filter(spark => spark.id !== id));
+    }, TRAIL_LIFETIME);
   }
 }
