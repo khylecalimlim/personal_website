@@ -13,6 +13,14 @@ interface Project {
 
 const ORDER_STORAGE_KEY = 'projects-order';
 
+const STATUS_SUMMARY_LABELS: Record<Project['status'], string> = {
+  wip: 'in progress',
+  complete: 'complete',
+  'on-hold': 'on hold',
+  'not-started': 'not started'
+};
+const STATUS_SUMMARY_ORDER: Project['status'][] = ['wip', 'complete', 'on-hold', 'not-started'];
+
 @Component({
   selector: 'app-projects',
   standalone: true,
@@ -88,6 +96,16 @@ export class ProjectsComponent implements OnInit {
 
     const titleOrder: string[] = JSON.parse(savedOrder);
     this.projects.sort((a, b) => titleOrder.indexOf(a.title) - titleOrder.indexOf(b.title));
+  }
+
+  get statusSummary() {
+    return STATUS_SUMMARY_ORDER
+      .map(status => ({
+        status,
+        label: STATUS_SUMMARY_LABELS[status],
+        count: this.projects.filter(p => p.status === status).length
+      }))
+      .filter(s => s.count > 0);
   }
 
   drop(event: CdkDragDrop<Project[]>) {

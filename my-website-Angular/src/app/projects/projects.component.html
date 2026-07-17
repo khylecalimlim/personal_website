@@ -2,6 +2,16 @@
 <div class="page">
   <h1>Projects</h1>
   <p class="subtitle">Things I've been building and exploring.</p>
+
+  <div class="stats-strip">
+    <span class="stat-total">{{ projects.length }} project{{ projects.length === 1 ? '' : 's' }}</span>
+    @for (s of statusSummary; track s.status) {
+      <span class="stat-item">
+        <span class="stat-dot" [class]="s.status"></span>{{ s.count }} {{ s.label }}
+      </span>
+    }
+  </div>
+
   <p class="drag-hint">Drag to reorder</p>
 
   <div class="projects-grid" cdkDropList (cdkDropListDropped)="drop($event)">
