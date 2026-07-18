@@ -72,6 +72,16 @@ h2 {
   }
 }
 
+.char-counter {
+  align-self: flex-end;
+  font-size: 0.75rem;
+  color: #666;
+
+  &.near-limit {
+    color: #e0a95c;
+  }
+}
+
 .error {
   color: #e05c5c;
   font-size: 0.875rem;

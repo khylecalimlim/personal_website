@@ -23,6 +23,8 @@ const CONFETTI_COUNT = 40;
 const CONFETTI_COLORS = ['#5b8dee', '#f5d76e', '#ff6b9d', '#5be05c', '#9b8cf2', '#ff9d4d'];
 const CONFETTI_LIFETIME = 2600; // ms — covers the longest duration + delay below
 
+export const COMMENT_MAX_LENGTH = 1000;
+
 @Component({
   selector: 'app-feedback',
   standalone: true,
@@ -31,6 +33,8 @@ const CONFETTI_LIFETIME = 2600; // ms — covers the longest duration + delay be
   styleUrl: './feedback.component.scss'
 })
 export class FeedbackComponent {
+  readonly commentMaxLength = COMMENT_MAX_LENGTH;
+
   name = signal('');
   comment = signal('');
   submitting = signal(false);

@@ -28,8 +28,11 @@
             (input)="comment.set($any($event.target).value)"
             [disabled]="submitting()"
             rows="5"
-            maxlength="1000"
+            [attr.maxlength]="commentMaxLength"
           ></textarea>
+          <span class="char-counter" [class.near-limit]="comment().length >= commentMaxLength * 0.9">
+            {{ comment().length }}/{{ commentMaxLength }}
+          </span>
         </div>
 
         @if (errorMessage()) {
