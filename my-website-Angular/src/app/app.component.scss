@@ -1,3 +1,13 @@
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  z-index: 101;
+  background-color: #5b8dee;
+  transition: width 0.1s linear;
+}
+
 .navbar {
   position: sticky;
   top: 0;

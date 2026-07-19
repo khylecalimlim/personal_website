@@ -129,4 +129,16 @@ export class AppComponent {
       this.trail.update(t => t.filter(spark => spark.id !== id));
     }, TRAIL_LIFETIME);
   }
+
+  // Scroll progress bar — thin fixed bar under the navbar area that fills
+  // left-to-right as the page scrolls, so there's always a sense of how far
+  // through a longer page (About, Command Center) you are.
+  scrollProgress = signal(0);
+
+  @HostListener('window:scroll')
+  onWindowScroll() {
+    const doc = document.documentElement;
+    const scrollable = doc.scrollHeight - doc.clientHeight;
+    this.scrollProgress.set(scrollable > 0 ? (doc.scrollTop / scrollable) * 100 : 0);
+  }
 }
