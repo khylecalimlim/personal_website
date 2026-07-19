@@ -143,6 +143,12 @@
   <router-outlet />
 </main>
 
+@if (showBackToTop()) {
+  <button class="back-to-top" (click)="scrollToTop()" title="Back to top" aria-label="Back to top">
+    &#8963;
+  </button>
+}
+
 @for (spark of sparks(); track spark.id) {
   <span class="spark"
     [style.left.px]="spark.x"

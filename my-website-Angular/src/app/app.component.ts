@@ -21,6 +21,8 @@ const AWAY_TITLE     = '👋 come back!';
 const TRAIL_LIFETIME     = 500; // ms — must match the CSS trail animation duration
 const TRAIL_MIN_DISTANCE = 18;  // px between pointer moves before spawning another trail dot
 
+const BACK_TO_TOP_THRESHOLD = 400; // px scrolled before the back-to-top button appears
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -135,10 +137,20 @@ export class AppComponent {
   // through a longer page (About, Command Center) you are.
   scrollProgress = signal(0);
 
+  // Back-to-top button — appears once you've scrolled past BACK_TO_TOP_THRESHOLD.
+  // Lives here (global) rather than duplicated per-page, since the show/hide
+  // and scroll-to-top behavior is identical on every page.
+  showBackToTop = signal(false);
+
   @HostListener('window:scroll')
   onWindowScroll() {
     const doc = document.documentElement;
     const scrollable = doc.scrollHeight - doc.clientHeight;
     this.scrollProgress.set(scrollable > 0 ? (doc.scrollTop / scrollable) * 100 : 0);
+    this.showBackToTop.set(doc.scrollTop > BACK_TO_TOP_THRESHOLD);
+  }
+
+  scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 }
