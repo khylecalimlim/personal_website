@@ -19,6 +19,15 @@
     <div class="settings-card">
       <h2>Website Settings</h2>
 
+      <div class="setting-row preset-row">
+        <label>Presets</label>
+        <div class="preset-buttons">
+          @for (opt of theme.themePresetOptions; track opt.key) {
+            <button class="preset-btn" (click)="theme.applyPreset(opt.key)">{{ opt.label }}</button>
+          }
+        </div>
+      </div>
+
       <div class="setting-row">
         <label>Background Color</label>
         <div class="wheel-wrapper">

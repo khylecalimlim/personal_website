@@ -15,6 +15,34 @@ export interface SparkPreset {
   colors: string[];
 }
 
+export interface ThemePreset {
+  label: string;
+  backgroundColor: string;
+  textColor: string;
+  fontFamily: string;
+}
+
+export const THEME_PRESETS: Record<string, ThemePreset> = {
+  ocean: {
+    label: 'Ocean',
+    backgroundColor: '#0f2027',
+    textColor: '#d7ecf0',
+    fontFamily: "'Inter', sans-serif",
+  },
+  sunset: {
+    label: 'Sunset',
+    backgroundColor: '#2b1810',
+    textColor: '#f5d7b8',
+    fontFamily: "'Merriweather', serif",
+  },
+  forest: {
+    label: 'Forest',
+    backgroundColor: '#122019',
+    textColor: '#d9e8d5',
+    fontFamily: "'Nunito', sans-serif",
+  },
+};
+
 export const DEFAULT_SPARK_PRESET = 'stars';
 
 export const SPARK_PRESETS: Record<string, SparkPreset> = {
@@ -50,12 +78,6 @@ export class ThemeService {
   // component's hardcoded text colors replaced with a var bound to
   // textColor (similar to the --header-text-color pattern used for
   // headings), or a broader CSS variable applied at a higher level.
-  // TODO(easy): one-click theme presets. Add a small named-preset list here
-  // (similar in shape to SPARK_PRESETS above — e.g. Ocean, Sunset, Forest, each
-  // bundling a backgroundColor/textColor/fontFamily trio) and a method like
-  // `applyPreset(key: string)` that sets all three signals at once. Render as
-  // preset buttons in the customization panel (app.component.html) above the
-  // existing manual color/font pickers, which stay as-is for full control.
   backgroundColor = signal(DEFAULT_BG);
   textColor = signal(DEFAULT_TEXT);
   fontFamily = signal(DEFAULT_FONT);
@@ -69,6 +91,19 @@ export class ThemeService {
     key,
     label: preset.label,
   }));
+
+  readonly themePresetOptions = Object.entries(THEME_PRESETS).map(([key, preset]) => ({
+    key,
+    label: preset.label,
+  }));
+
+  applyPreset(key: string) {
+    const preset = THEME_PRESETS[key];
+    if (!preset) return;
+    this.backgroundColor.set(preset.backgroundColor);
+    this.textColor.set(preset.textColor);
+    this.fontFamily.set(preset.fontFamily);
+  }
 
   // Web fonts (Fira Code, Inter, Lato, Merriweather, Nunito, Oswald, Playfair
   // Display, Poppins, Raleway, Roboto, Space Mono, Ubuntu) are loaded via the
