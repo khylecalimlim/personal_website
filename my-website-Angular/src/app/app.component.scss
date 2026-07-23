@@ -338,6 +338,44 @@
   }
 }
 
+.site-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1.5rem 2rem;
+  border-top: 1px solid #2e2e2e;
+  color: #666;
+  font-size: 0.85rem;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.25rem;
+}
+
+.footer-link {
+  color: #888;
+  text-decoration: none;
+  transition: color 0.2s;
+
+  .link-icon {
+    font-size: 0.75rem;
+    opacity: 0.6;
+  }
+
+  &:hover {
+    color: #5b8dee;
+  }
+}
+
+.footer-copyright {
+  color: #555;
+  font-size: 0.78rem;
+}
+
 // ── Tablet (≤ 768px) ────────────────────────────────────────────────────────
 @media (max-width: 768px) {
   .navbar {

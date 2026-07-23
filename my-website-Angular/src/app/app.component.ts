@@ -46,6 +46,7 @@ export class AppComponent {
   theme = inject(ThemeService);
   settingsOpen = false;
   navCollapsed = false;
+  readonly currentYear = new Date().getFullYear();
 
   private readonly originalTitle = document.title;
 

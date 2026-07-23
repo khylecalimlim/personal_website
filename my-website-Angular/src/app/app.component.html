@@ -152,6 +152,19 @@
   <router-outlet />
 </main>
 
+<footer class="site-footer">
+  <div class="footer-links">
+    <a href="https://github.com/khylecalimlim" class="footer-link" target="_blank" rel="noopener">
+      GitHub <span class="link-icon" aria-hidden="true">↗</span>
+    </a>
+    <a href="https://www.linkedin.com/in/khyle-calimlim-3b57b91b5/" class="footer-link" target="_blank" rel="noopener">
+      LinkedIn <span class="link-icon" aria-hidden="true">↗</span>
+    </a>
+    <a href="mailto:khylecalimlim@gmail.com" class="footer-link">Email</a>
+  </div>
+  <p class="footer-copyright">&copy; {{ currentYear }} Khyle Calimlim</p>
+</footer>
+
 @if (showBackToTop()) {
   <button class="back-to-top" (click)="scrollToTop()" title="Back to top" aria-label="Back to top">
     &#8963;
