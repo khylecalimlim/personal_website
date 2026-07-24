@@ -66,6 +66,11 @@ export const SPARK_PRESETS: Record<string, SparkPreset> = {
     glyphs: ['🔥', '✨', '💥', '⚡', '🌟'],
     colors: ['#ff7a3d', '#ff4d4d', '#ffce4d', '#ff9d4d'],
   },
+  chess: {
+    label: 'Chess',
+    glyphs: ['♟', '♞', '♜', '♛', '♚'],
+    colors: ['#eed9b6', '#8a5a3b', '#5b8dee', '#faf3e6'],
+  },
 };
 
 @Injectable({ providedIn: 'root' })
