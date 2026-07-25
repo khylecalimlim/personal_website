@@ -20,14 +20,22 @@
   }
 }
 
-.download-btn {
+.resume-actions {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.download-btn,
+.print-btn {
   background: none;
   border: 1px solid #555;
   color: inherit;
+  font-family: inherit;
   font-size: 0.9rem;
   padding: 0.4rem 0.9rem;
   border-radius: 4px;
   text-decoration: none;
+  cursor: pointer;
   transition: background-color 0.2s, border-color 0.2s;
 
   &:hover {
@@ -81,7 +89,7 @@
     padding: 0;
   }
 
-  .resume-header .download-btn,
+  .resume-header .resume-actions,
   .pdf-fallback {
     display: none;
   }

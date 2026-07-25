@@ -1,7 +1,10 @@
 <div class="resume-page">
   <div class="resume-header">
     <h1>Resume</h1>
-    <a [href]="pdfDownloadUrl" download="Khyle_Calimlim_Resume.pdf" class="download-btn">Download PDF</a>
+    <div class="resume-actions">
+      <button class="print-btn" (click)="print()">Print</button>
+      <a [href]="pdfDownloadUrl" download="Khyle_Calimlim_Resume.pdf" class="download-btn">Download PDF</a>
+    </div>
   </div>
 
   <div class="pdf-container">

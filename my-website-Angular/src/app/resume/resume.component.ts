@@ -11,4 +11,8 @@ export class ResumeComponent {
   private sanitizer = inject(DomSanitizer);
   readonly pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl('resume.pdf');
   readonly pdfDownloadUrl = 'resume.pdf';
+
+  print() {
+    window.print();
+  }
 }
