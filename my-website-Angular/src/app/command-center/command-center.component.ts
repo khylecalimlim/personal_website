@@ -6,6 +6,8 @@ interface CommandCenterLink {
   href: string;
   jiggling?: boolean;
   inverted?: boolean;
+  subLabel?: string;
+  subHref?: string;
 }
 
 interface CommandCenterSection {
@@ -66,7 +68,12 @@ export class CommandCenterComponent implements OnInit {
         // right target. What it should point to instead is TBD.
         { label: 'Claude Code 101', href: 'https://anthropic.skilljar.com/claude-code-101' },
         { label: 'Docker Training', href: 'https://www.docker.com/trainings/' },
-        { label: 'AWS Certification', href: 'https://aws.amazon.com/certification/' }
+        {
+          label: 'AWS Certification',
+          href: 'https://aws.amazon.com/certification/',
+          subLabel: 'Cloud Practitioner Exam Prep',
+          subHref: 'https://skillbuilder.aws/category/exam-prep/cloud-practitioner-foundational-CLF-C02'
+        }
       ]
     },
     {
