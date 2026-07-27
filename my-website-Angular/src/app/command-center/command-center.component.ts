@@ -65,7 +65,8 @@ export class CommandCenterComponent implements OnInit {
         // course is finished, so this anthropic.skilljar.com link is no longer the
         // right target. What it should point to instead is TBD.
         { label: 'Claude Code 101', href: 'https://anthropic.skilljar.com/claude-code-101' },
-        { label: 'Docker Training', href: 'https://www.docker.com/trainings/' }
+        { label: 'Docker Training', href: 'https://www.docker.com/trainings/' },
+        { label: 'AWS Certification', href: 'https://aws.amazon.com/certification/' }
       ]
     },
     {
