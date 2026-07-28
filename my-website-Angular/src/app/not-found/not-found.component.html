@@ -6,6 +6,7 @@
     <h1 class="code">404</h1>
     <p class="message">This square doesn't exist.</p>
     <p class="submessage">The pawn wandered off looking for it too. No luck.</p>
+    <p class="fun-fact" [class.fading]="funFactFading()">{{ funFact() }}</p>
     <a routerLink="/" class="btn btn-primary">Back to Home</a>
   </div>
 </div>
