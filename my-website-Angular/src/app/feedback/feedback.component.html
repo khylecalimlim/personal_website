@@ -60,7 +60,7 @@
         <div class="entry-card">
           <div class="entry-header">
             <span class="entry-name">{{ entry.name }}</span>
-            <span class="entry-date">{{ entry.createdAt | date:'mediumDate' }}</span>
+            <span class="entry-date" [title]="relativeTime(entry.createdAt)">{{ entry.createdAt | date:'mediumDate' }}</span>
           </div>
           <p class="entry-comment">{{ entry.comment }}</p>
         </div>

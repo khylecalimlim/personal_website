@@ -25,6 +25,22 @@ const CONFETTI_LIFETIME = 2600; // ms — covers the longest duration + delay be
 
 export const COMMENT_MAX_LENGTH = 1000;
 
+function relativeTime(date: Date): string {
+  const diffSec = Math.round((Date.now() - date.getTime()) / 1000);
+  const diffMin = Math.round(diffSec / 60);
+  const diffHour = Math.round(diffMin / 60);
+  const diffDay = Math.round(diffHour / 24);
+  const diffMonth = Math.round(diffDay / 30);
+  const diffYear = Math.round(diffMonth / 12);
+
+  if (diffSec < 60) return 'just now';
+  if (diffMin < 60) return `${diffMin} minute${diffMin === 1 ? '' : 's'} ago`;
+  if (diffHour < 24) return `${diffHour} hour${diffHour === 1 ? '' : 's'} ago`;
+  if (diffDay < 30) return `${diffDay} day${diffDay === 1 ? '' : 's'} ago`;
+  if (diffMonth < 12) return `${diffMonth} month${diffMonth === 1 ? '' : 's'} ago`;
+  return `${diffYear} year${diffYear === 1 ? '' : 's'} ago`;
+}
+
 @Component({
   selector: 'app-feedback',
   standalone: true,
@@ -47,6 +63,8 @@ export class FeedbackComponent {
 
   confetti = signal<ConfettiPiece[]>([]);
   private nextConfettiId = 0;
+
+  relativeTime = relativeTime;
 
   private burstConfetti() {
     const burst: ConfettiPiece[] = Array.from({ length: CONFETTI_COUNT }, () => ({
