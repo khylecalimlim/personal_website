@@ -177,3 +177,20 @@ h1 {
     opacity: 1;
   }
 }
+
+.copy-btn {
+  background: none;
+  border: none;
+  color: inherit;
+  opacity: 0.5;
+  font-size: 0.75rem;
+  font-family: inherit;
+  cursor: pointer;
+  padding: 0;
+  transition: opacity 0.2s, color 0.2s;
+
+  &:hover {
+    opacity: 1;
+    color: #5b8dee;
+  }
+}

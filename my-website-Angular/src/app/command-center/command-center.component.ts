@@ -8,6 +8,7 @@ interface CommandCenterLink {
   inverted?: boolean;
   subLabel?: string;
   subHref?: string;
+  copied?: boolean;
 }
 
 interface CommandCenterSection {
@@ -109,6 +110,13 @@ export class CommandCenterComponent implements OnInit {
   pop(link: CommandCenterLink): void {
     link.inverted = !link.inverted;
     link.jiggling = true;
+  }
+
+  copyLink(link: CommandCenterLink, event: MouseEvent): void {
+    event.stopPropagation();
+    navigator.clipboard.writeText(link.href).catch(() => {});
+    link.copied = true;
+    setTimeout(() => { link.copied = false; }, 1500);
   }
 
   drop(section: CommandCenterSection, event: CdkDragDrop<CommandCenterLink[]>): void {
