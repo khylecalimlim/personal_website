@@ -1,9 +1,10 @@
 import { Component, signal, computed, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-const DRAG_THRESHOLD = 50;   // px — minimum drag distance to count as a deliberate swipe
-const SLIDE_DURATION = 350;  // ms — must match CSS transition
-const SPIN_VELOCITY  = 0.55; // px/ms — flick speed beyond which extra spin steps get added
+const DRAG_THRESHOLD    = 50;   // px — minimum drag distance to count as a deliberate swipe
+const SLIDE_DURATION    = 350;  // ms — must match CSS transition
+const SPIN_VELOCITY     = 0.55; // px/ms — flick speed beyond which extra spin steps get added
+const AUTOPLAY_INTERVAL = 5000; // ms between auto-advances when idle
 
 interface CarouselImage {
   src: string;
@@ -41,6 +42,7 @@ export class AboutComponent implements AfterViewInit, OnDestroy {
   private dragStartX    = 0;
   private containerWidth = 0;
   private resizeObs!: ResizeObserver;
+  private autoplayTimer?: ReturnType<typeof setInterval>;
 
   // Velocity tracking (px/ms) for flick-to-spin detection
   private lastMoveTime = 0;
@@ -58,9 +60,26 @@ export class AboutComponent implements AfterViewInit, OnDestroy {
       this.setSlotVar();
     });
     this.resizeObs.observe(this.carouselOuter.nativeElement);
+    this.startAutoplay();
   }
 
-  ngOnDestroy() { this.resizeObs?.disconnect(); }
+  ngOnDestroy() {
+    this.resizeObs?.disconnect();
+    this.stopAutoplay();
+  }
+
+  // Auto-advances one slide at a time, same as a single click/flick would.
+  // Guarded against firing mid-drag or mid-spin so it can never overlap a
+  // manual interaction and corrupt the animation state.
+  private startAutoplay() {
+    this.autoplayTimer = setInterval(() => {
+      if (!this.isDragging && !this.snapping) this.spin(1, 1);
+    }, AUTOPLAY_INTERVAL);
+  }
+
+  private stopAutoplay() {
+    clearInterval(this.autoplayTimer);
+  }
 
   private setSlotVar() {
     this.carouselOuter.nativeElement.style.setProperty(
@@ -111,11 +130,15 @@ export class AboutComponent implements AfterViewInit, OnDestroy {
     return (this.isDragging || this.snapping) ? 'none' : `transform ${SLIDE_DURATION}ms ease-out`;
   }
 
-  goTo(index: number) { this.current.set(index); }
+  goTo(index: number) {
+    this.stopAutoplay();
+    this.current.set(index);
+  }
 
   // ── Pointer / drag handlers ────────────────────────────────────────────────
 
   onPointerDown(e: PointerEvent) {
+    this.stopAutoplay();
     this.isDragging   = true;
     this.hasDragged   = false;
     this.dragStartX   = e.clientX;
