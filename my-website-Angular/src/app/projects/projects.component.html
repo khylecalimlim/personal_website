@@ -12,10 +12,14 @@
     }
   </div>
 
-  <p class="drag-hint">Drag to reorder</p>
+  @if (selectedTag()) {
+    <p class="drag-hint">Showing "{{ selectedTag() }}" only — click the tag again to clear (drag disabled while filtering)</p>
+  } @else {
+    <p class="drag-hint">Drag to reorder</p>
+  }
 
-  <div class="projects-grid" cdkDropList (cdkDropListDropped)="drop($event)">
-    @for (project of projects; track project.title) {
+  <div class="projects-grid" cdkDropList [cdkDropListDisabled]="selectedTag() !== null" (cdkDropListDropped)="drop($event)">
+    @for (project of filteredProjects; track project.title) {
       <div class="project-card" cdkDrag>
         <div class="drag-handle" cdkDragHandle aria-label="Drag to reorder">
           <span class="handle-icon" aria-hidden="true">⠿</span>
@@ -37,7 +41,7 @@
           <p class="description">{{ project.description }}</p>
           <div class="tags">
             @for (tag of project.tags; track tag) {
-              <span class="tag">{{ tag }}</span>
+              <span class="tag" [class.active]="selectedTag() === tag" (click)="toggleTag(tag)">{{ tag }}</span>
             }
           </div>
         </div>

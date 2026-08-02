@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
 
 interface Project {
@@ -90,12 +90,23 @@ export class ProjectsComponent implements OnInit {
     }
   ];
 
+  selectedTag = signal<string | null>(null);
+
   ngOnInit(): void {
     const savedOrder = localStorage.getItem(ORDER_STORAGE_KEY);
     if (!savedOrder) return;
 
     const titleOrder: string[] = JSON.parse(savedOrder);
     this.projects.sort((a, b) => titleOrder.indexOf(a.title) - titleOrder.indexOf(b.title));
+  }
+
+  get filteredProjects(): Project[] {
+    const tag = this.selectedTag();
+    return tag ? this.projects.filter(p => p.tags.includes(tag)) : this.projects;
+  }
+
+  toggleTag(tag: string): void {
+    this.selectedTag.update(current => current === tag ? null : tag);
   }
 
   get statusSummary() {
