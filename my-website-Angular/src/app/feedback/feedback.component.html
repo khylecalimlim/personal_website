@@ -36,11 +36,11 @@
         </div>
 
         @if (errorMessage()) {
-          <p class="error">{{ errorMessage() }}</p>
+          <p class="error" role="alert">{{ errorMessage() }}</p>
         }
 
         @if (submitted()) {
-          <p class="success">Thanks for your feedback!</p>
+          <p class="success" role="status">Thanks for your feedback!</p>
         }
 
         <button type="submit" class="submit-btn" [disabled]="submitting()">
