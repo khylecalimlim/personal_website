@@ -70,8 +70,12 @@ export class AboutComponent implements AfterViewInit, OnDestroy {
 
   // Auto-advances one slide at a time, same as a single click/flick would.
   // Guarded against firing mid-drag or mid-spin so it can never overlap a
-  // manual interaction and corrupt the animation state.
+  // manual interaction and corrupt the animation state. Skipped entirely
+  // under prefers-reduced-motion, same convention as not-found.component's
+  // wandering pawn.
   private startAutoplay() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
     this.autoplayTimer = setInterval(() => {
       if (!this.isDragging && !this.snapping) this.spin(1, 1);
     }, AUTOPLAY_INTERVAL);
