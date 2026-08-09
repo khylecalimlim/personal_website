@@ -46,6 +46,9 @@
                 <button type="button" class="copy-btn" (click)="copyLink(link, $event)">
                   {{ link.copied ? 'Copied!' : 'Copy link' }}
                 </button>
+                @if (link.copied) {
+                  <span class="sr-only" role="status">Link copied to clipboard</span>
+                }
               </div>
             </li>
           }
