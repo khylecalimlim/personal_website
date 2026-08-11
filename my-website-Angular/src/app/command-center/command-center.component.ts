@@ -114,9 +114,10 @@ export class CommandCenterComponent implements OnInit {
 
   copyLink(link: CommandCenterLink, event: MouseEvent): void {
     event.stopPropagation();
-    navigator.clipboard.writeText(link.href).catch(() => {});
-    link.copied = true;
-    setTimeout(() => { link.copied = false; }, 1500);
+    navigator.clipboard.writeText(link.href).then(() => {
+      link.copied = true;
+      setTimeout(() => { link.copied = false; }, 1500);
+    }).catch(() => {});
   }
 
   drop(section: CommandCenterSection, event: CdkDragDrop<CommandCenterLink[]>): void {
