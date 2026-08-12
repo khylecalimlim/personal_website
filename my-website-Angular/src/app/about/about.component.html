@@ -59,6 +59,7 @@
           [class.active]="i === current()"
           (click)="goTo(i)"
           [attr.aria-label]="'Go to slide ' + (i + 1)"
+          [attr.aria-current]="i === current() ? 'true' : null"
         ></button>
       }
     </div>
