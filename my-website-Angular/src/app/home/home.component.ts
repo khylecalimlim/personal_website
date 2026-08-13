@@ -70,6 +70,8 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
     this.resizeObserver = new ResizeObserver(() => this.resize());
     this.resizeObserver.observe(canvas.parentElement!);
 
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
     let factIndex = 0;
     this.funFactInterval = setInterval(() => {
       this.funFactFading.set(true);

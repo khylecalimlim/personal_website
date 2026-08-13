@@ -25,6 +25,8 @@ export class NotFoundComponent implements OnInit, OnDestroy {
   private funFactInterval!: ReturnType<typeof setInterval>;
 
   ngOnInit() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
     let factIndex = 0;
     this.funFactInterval = setInterval(() => {
       this.funFactFading.set(true);
