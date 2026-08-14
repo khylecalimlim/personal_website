@@ -64,13 +64,16 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
     const canvas = this.canvasRef.nativeElement;
     this.ctx = canvas.getContext('2d')!;
     this.resize();
-    this.spawnParticles();
-    this.animate();
 
     this.resizeObserver = new ResizeObserver(() => this.resize());
     this.resizeObserver.observe(canvas.parentElement!);
 
+    // Both the particle background and the fun-fact rotation are decorative
+    // motion, so neither starts under reduced motion.
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    this.spawnParticles();
+    this.animate();
 
     let factIndex = 0;
     this.funFactInterval = setInterval(() => {
