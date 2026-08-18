@@ -9,11 +9,12 @@
         <div class="field">
           <label for="name">Name</label>
           <input
+            #nameInput
             id="name"
             type="text"
             placeholder="Your name"
             [value]="name()"
-            (input)="name.set($any($event.target).value)"
+            (input)="name.set(nameInput.value)"
             [disabled]="submitting()"
             maxlength="80"
           />
@@ -22,10 +23,11 @@
         <div class="field">
           <label for="comment">Comment</label>
           <textarea
+            #commentInput
             id="comment"
             placeholder="What did you think?"
             [value]="comment()"
-            (input)="comment.set($any($event.target).value)"
+            (input)="comment.set(commentInput.value)"
             [disabled]="submitting()"
             rows="5"
             [attr.maxlength]="commentMaxLength"
