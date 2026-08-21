@@ -249,4 +249,9 @@ h1 {
     border-color: #5b8dee;
     color: #5b8dee;
   }
+
+  &:focus-visible {
+    outline: 2px solid #5b8dee;
+    outline-offset: 2px;
+  }
 }

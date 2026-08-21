@@ -41,7 +41,16 @@
           <p class="description">{{ project.description }}</p>
           <div class="tags">
             @for (tag of project.tags; track tag) {
-              <span class="tag" [class.active]="selectedTag() === tag" (click)="toggleTag(tag)">{{ tag }}</span>
+              <span
+                class="tag"
+                role="button"
+                tabindex="0"
+                [class.active]="selectedTag() === tag"
+                [attr.aria-pressed]="selectedTag() === tag"
+                (click)="toggleTag(tag)"
+                (keydown.enter)="toggleTag(tag)"
+                (keydown.space)="$event.preventDefault(); toggleTag(tag)"
+              >{{ tag }}</span>
             }
           </div>
         </div>
