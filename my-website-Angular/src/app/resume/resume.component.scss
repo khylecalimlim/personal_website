@@ -51,6 +51,13 @@
   min-height: 0;
 }
 
+.pdf-frame-wrapper {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+}
+
 .pdf-viewer {
   flex: 1;
   width: 100%;
@@ -58,6 +65,19 @@
   border-radius: 6px;
   background: #fff;
   min-height: 0;
+}
+
+.pdf-loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #3a3a3a;
+  border-radius: 6px;
+  background: #1a1a1a;
+  color: #999;
+  font-size: 0.9rem;
 }
 
 .pdf-fallback {
@@ -90,7 +110,8 @@
   }
 
   .resume-header .resume-actions,
-  .pdf-fallback {
+  .pdf-fallback,
+  .pdf-loading {
     display: none;
   }
 

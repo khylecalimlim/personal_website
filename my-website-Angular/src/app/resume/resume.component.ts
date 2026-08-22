@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
@@ -11,6 +11,12 @@ export class ResumeComponent {
   private sanitizer = inject(DomSanitizer);
   readonly pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl('resume.pdf');
   readonly pdfDownloadUrl = 'resume.pdf';
+
+  pdfLoaded = signal(false);
+
+  onPdfLoad() {
+    this.pdfLoaded.set(true);
+  }
 
   print() {
     window.print();

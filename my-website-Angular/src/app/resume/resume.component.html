@@ -8,11 +8,18 @@
   </div>
 
   <div class="pdf-container">
-    <iframe
-      [src]="pdfUrl"
-      title="Khyle Calimlim Resume"
-      class="pdf-viewer"
-    ></iframe>
+    <div class="pdf-frame-wrapper">
+      @if (!pdfLoaded()) {
+        <p class="pdf-loading" role="status">Loading resume…</p>
+      }
+
+      <iframe
+        [src]="pdfUrl"
+        title="Khyle Calimlim Resume"
+        class="pdf-viewer"
+        (load)="onPdfLoad()"
+      ></iframe>
+    </div>
 
     <p class="pdf-fallback">
       Can't see the PDF?
